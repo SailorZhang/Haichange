@@ -1,7 +1,7 @@
 // JavaScript Document
 window.tab_params = {"tabs":[],last_active:""};
 function addTab(menu){
-	var href = menu.attr("frame_src");
+	var href = menu.attr("href");
 	var text = menu.text();
 	var uname = uniencode(text);
 	if(opened_tab(uname)){
@@ -9,17 +9,28 @@ function addTab(menu){
 	}
 	else if(window.tab_params["tabs"].length >= 6){
 		alert("最多同时打开6个Tab页，请关闭不用的窗口");
-		return false;	
 	}
 	else{
-		window.tab_params["tabs"].push(uname);
-		var str = "<a uname='" + uname + "' class='menu active' frame_src='" + href + "'>";
-			str += "<span class='text'>" + text + "</span>";
-			str += "<span class='btn_close'></span>";
-			str += "</a>";
-		var iframe = "<iframe uname='" + uname + "' src='" + href + "' scrolling='auto' width='100%' height='100%' frameborder='0'></iframe>";
-		$("#tab_menu").append(str);
-		$("#content").append(iframe);
+
+		if(href!='#'){
+			var str = "<a uname='" + uname + "' class='menu active' frame_src='" + href + "'>";
+				str += "<span class='text'>" + text + "</span>";
+				str += "<span class='btn_close'></span>";
+				str += "</a>";
+			var getHtml = $.get(href).success(function(html){
+				window.tab_params["tabs"].push(uname);
+				$("#tab_menu").append(str);
+				var div = $('<div>').attr('uname',uname).appendTo($('#content')).append(html);
+				//$("#content").append(html);
+			}).error(function(d){
+				window.tab_params["tabs"].push(uname);
+				$("#tab_menu").append(str);
+				var div = $('<div>').attr('uname',uname).appendTo($('#content')).append(d.responseText);
+			});
+		}else{
+			return false;
+		}
+		//var iframe = "<iframe uname='" + uname + "' src='" + href + "' scrolling='auto' width='100%' height='100%' frameborder='0'></iframe>";
 		active_tab(uname);
 	}
 }
@@ -49,7 +60,7 @@ function removeTab(btn_close){
 function active_tab(uname){
 	$(".menu_level3 a").removeClass("active");
 	$("#tab_menu .menu").removeClass("active");
-	$("#content iframe").hide();
+	$("#content > div").hide();
 	var text =  unescape(uname.replace(/\\u/g, "%u"))
 	$(".menu_level3 a").each(function(){
 		if($(this).text() == text){
@@ -57,7 +68,7 @@ function active_tab(uname){
 		}
 	});
 	$("#tab_menu .menu[uname='" + uname + "']").addClass("active");
-	$("#content iframe[uname='" + uname + "']").show();
+	$("#content div[uname='" + uname + "']").show();
 }
 function uniencode(text) { 
 	text = escape(text.toString()).replace(/\+/g, "%2B"); 
@@ -76,7 +87,7 @@ function uniencode(text) {
 $(document).ready(function(){
 	var h1=$(document).height();
 	$(".left,.right,.inner").css("height",h1-5);
-	$(".right .inner .content,.right .inner .content iframe").css("height",h1-113);
+	$(".right .inner .content,.right .inner .content div:first").css("height",h1-113);
 	$(".menu_level2").first().addClass("active");
 	$(".menu_level2").first().siblings().slideDown(300);
 	$(".menu a").click(function(){
@@ -87,6 +98,7 @@ $(document).ready(function(){
 		$(".menu_level3 a").removeClass("active");
 		$(this).addClass("active");
 		addTab($(this));
+		return false;
 	});
 	$(".menu_level2").click(function(){
 		$(".menu_level2").removeClass("active");
