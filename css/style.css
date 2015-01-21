@@ -108,6 +108,10 @@ img{border:none;}
 	color:#fff;
 }
 /*  左侧菜单-三级菜单  */
+.sub_menu h2
+{
+	line-height: 25px;
+}
 .sub_menu .menu_level3{
 	border-bottom:1px solid #ddd;
 	display:none;
