@@ -126,6 +126,7 @@ img{border:none;}
 .left .sub_menu .menu_level3 a.active{background-color:#e4e7ea;}
 /*  right  */
 .right{
+	/*float:left;*/
 	margin-left:230px;
 	min-height:500px;
 	min-width:890px;

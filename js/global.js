@@ -1,38 +1,38 @@
 // JavaScript Document
 window.tab_params = {"tabs":[],last_active:""};
+var tabs;
+var tabTemplate = "<li><a href='#{href}'>#{label}</a> <span class='ui-icon ui-icon-close' role='presentation'>Remove Tab</span></li>";
 function addTab(menu){
 	var href = menu.attr("href");
 	var text = menu.text();
-	var uname = uniencode(text);
-	if(opened_tab(uname)){
-		active_tab(uname);
-	}
-	else if(window.tab_params["tabs"].length >= 6){
-		alert("最多同时打开6个Tab页，请关闭不用的窗口");
-	}
-	else{
+	var reference = menu.attr('reference');
+	
 
 		if(href!='#'){
-			var str = "<a uname='" + uname + "' class='menu active' frame_src='" + href + "'>";
-				str += "<span class='text'>" + text + "</span>";
-				str += "<span class='btn_close'></span>";
-				str += "</a>";
-			var getHtml = $.get(href).success(function(html){
-				window.tab_params["tabs"].push(uname);
-				$("#tab_menu").append(str);
-				var div = $('<div>').attr('uname',uname).appendTo($('#content')).append(html);
-				//$("#content").append(html);
+			// var str = "<a uname='" + uname + "' class='menu active' frame_src='" + href + "'>";
+			// 	str += "<span class='text'>" + text + "</span>";
+			// 	str += "<span class='btn_close'></span>";
+			// 	str += "</a>";
+			// var label = tabTitle.val() || "Tab " + tabCounter,
+			      var  id = "tabs-" + reference,
+			        li = $( tabTemplate.replace( /#\{href\}/g, "#" + id ).replace( /#\{label\}/g, text ) );
+			        tabs.find( ".ui-tabs-nav" ).append( li );
+			$.get(href).success(function(html){
+			    tabs.append( "<div id='" + id + "'>" + html + "</div>" );
+				tabs.tabs( "refresh" );
+				// tabs.tabs("select", id);
+				// tabs.tabs( "load", "#"+id );
 			}).error(function(d){
-				window.tab_params["tabs"].push(uname);
-				$("#tab_menu").append(str);
-				var div = $('<div>').attr('uname',uname).appendTo($('#content')).append(d.responseText);
+				tabs.append( "<div id='" + id + "'>" + d.responseText + "</div>" );
+				tabs.tabs( "refresh" );
+				tabs.tabs( "load", "#"+id );
+				// $("#tab_menu").append(str);
+				// var div = $('<div>').attr('uname',uname).appendTo($('#content')).append(d.responseText);
 			});
 		}else{
 			return false;
 		}
-		//var iframe = "<iframe uname='" + uname + "' src='" + href + "' scrolling='auto' width='100%' height='100%' frameborder='0'></iframe>";
-		active_tab(uname);
-	}
+		
 }
 function opened_tab(uname){
 	if(window.tab_params["tabs"].indexOf(uname)>=0){ return true; }
@@ -86,8 +86,8 @@ function uniencode(text) {
 }
 $(document).ready(function(){
 	var h1=$(document).height();
-	$(".left,.right,.inner").css("height",h1-5);
-	$(".right .inner .content,.right .inner .content div:first").css("height",h1-113);
+	//$(".left,.right,.inner").css("height",h1-5);
+	//$(".right .inner .content,.right .inner .content div:first").css("height",h1-113);
 	$(".menu_level2").first().addClass("active");
 	$(".menu_level2").first().siblings().slideDown(300);
 	$(".menu a").click(function(){
@@ -115,6 +115,9 @@ $(document).ready(function(){
 		removeTab($(this));
 		return false;
 	});
+	tabs=$('#tabs').tabs();
+	$('body').layout({applyDefaultStyles:true});
+	$('.sub_menu').accordion();
 });
 function log(info){
 	return console.log(info);
