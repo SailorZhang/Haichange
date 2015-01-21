@@ -1,33 +1,33 @@
 // JavaScript Document
-window.tab_params = {"tabs":[],last_active:""};
-var tabs;
-var tabTemplate = "<li><a href='#{href}'>#{label}</a> <span class='ui-icon ui-icon-close' role='presentation'>Remove Tab</span></li>";
+var tabs,
+maxTabs=2,
+tabTemplate = "<li><a href='#{href}'>#{label}</a> <span class='ui-icon ui-icon-close' role='presentation'>Remove Tab</span></li>";
 function addTab(menu){
 	var href = menu.attr("href");
 	var text = menu.text();
 	var reference = menu.attr('reference');
-	
-
 		if(href!='#'){
-			// var str = "<a uname='" + uname + "' class='menu active' frame_src='" + href + "'>";
-			// 	str += "<span class='text'>" + text + "</span>";
-			// 	str += "<span class='btn_close'></span>";
-			// 	str += "</a>";
-			// var label = tabTitle.val() || "Tab " + tabCounter,
-			      var  id = "tabs-" + reference,
-			        li = $( tabTemplate.replace( /#\{href\}/g, "#" + id ).replace( /#\{label\}/g, text ) );
-			        tabs.find( ".ui-tabs-nav" ).append( li );
+			 var  id = "tabs-" + reference,
+			        li;
+		    if($('#'+id).length){
+		    	tabs.tabs( "option", 'active',$("#"+id).index()-1 );
+		    	return false;
+		    }
+		    if(tabs.tabs("instance").anchors.length>maxTabs)
+			{
+				alert('最多同时打开'+maxTabs+'个Tab页，请关闭不用的窗口！');
+				return false;
+			}
+		    li = $( tabTemplate.replace( /#\{href\}/g, "#" + id ).replace( /#\{label\}/g, text ) );
+			tabs.find( ".ui-tabs-nav" ).append( li );
 			$.get(href).success(function(html){
 			    tabs.append( "<div id='" + id + "'>" + html + "</div>" );
 				tabs.tabs( "refresh" );
-				// tabs.tabs("select", id);
-				// tabs.tabs( "load", "#"+id );
+				tabs.tabs( "option", 'active',$("#"+id).index()-1 );
 			}).error(function(d){
 				tabs.append( "<div id='" + id + "'>" + d.responseText + "</div>" );
 				tabs.tabs( "refresh" );
-				tabs.tabs( "load", "#"+id );
-				// $("#tab_menu").append(str);
-				// var div = $('<div>').attr('uname',uname).appendTo($('#content')).append(d.responseText);
+				tabs.tabs( "option", 'active',$("#"+id).index()-1 );
 			});
 		}else{
 			return false;
@@ -38,86 +38,44 @@ function opened_tab(uname){
 	if(window.tab_params["tabs"].indexOf(uname)>=0){ return true; }
 	return false;
 }
-function removeTab(btn_close){
-	var tab = btn_close.parent();
-	var is_active = tab.hasClass("active");
-	var next_tab;
-	var uname = uniencode(btn_close.siblings("span.text").text());
-	if(is_active){
-		if(tab.next().length > 0){
-			next_tab = tab.next();
-		}
-		else{
-			next_tab = tab.prev();
-		}
-		var next_uname = uniencode(next_tab.find("span.text").text());
-		active_tab(next_uname);
-	}
-	$("[uname='" + uname + "']").remove();
-	var uname_index = window.tab_params["tabs"].indexOf(uname);
-	window.tab_params["tabs"].splice(uname_index,1);
-}
-function active_tab(uname){
-	$(".menu_level3 a").removeClass("active");
-	$("#tab_menu .menu").removeClass("active");
-	$("#content > div").hide();
-	var text =  unescape(uname.replace(/\\u/g, "%u"))
-	$(".menu_level3 a").each(function(){
-		if($(this).text() == text){
-			$(this).addClass("active");
-		}
-	});
-	$("#tab_menu .menu[uname='" + uname + "']").addClass("active");
-	$("#content div[uname='" + uname + "']").show();
-}
-function uniencode(text) { 
-	text = escape(text.toString()).replace(/\+/g, "%2B"); 
-	var matches = text.match(/(%([0-9A-F]{2}))/gi); 
-	if (matches) { 
-		for (var matchid = 0; matchid < matches.length; matchid++) { 
-			var code = matches[matchid].substring(1,3); 
-			if (parseInt(code, 16) >= 128) { 
-				text = text.replace(matches[matchid], '%u00' + code); 
-			} 
-		} 
-	} 
-	text = text.replace('%25', '%u0025'); 
-	return text; 
-}
 $(document).ready(function(){
-	var h1=$(document).height();
+	// var h1=$(document).height();
 	//$(".left,.right,.inner").css("height",h1-5);
 	//$(".right .inner .content,.right .inner .content div:first").css("height",h1-113);
-	$(".menu_level2").first().addClass("active");
-	$(".menu_level2").first().siblings().slideDown(300);
-	$(".menu a").click(function(){
-		$(".menu a").removeClass("active");
-		$(this).addClass("active");
-	});
+	// $(".menu_level2").first().addClass("active");
+	// $(".menu_level2").first().siblings().slideDown(300);
+	// $(".menu a").click(function(){
+	// 	$(".menu a").removeClass("active");
+	// 	$(this).addClass("active");
+	// });
 	$(".menu_level3 a").click(function(){
-		$(".menu_level3 a").removeClass("active");
-		$(this).addClass("active");
-		addTab($(this));
+			addTab($(this));
 		return false;
 	});
-	$(".menu_level2").click(function(){
-		$(".menu_level2").removeClass("active");
-		$(this).addClass("active");
-		$(".menu_level3").slideUp(300);
-		$(this).siblings(".menu_level3").slideDown(300);
-	});
-	$("#tab_menu").on('click','.menu',function(){
-		var text = $(this).find("span.text").text();
-		var uname = uniencode(text);
-		active_tab(uname);
-	});
-	$("#tab_menu").on('click','.btn_close',function(){
-		removeTab($(this));
-		return false;
-	});
+	// $(".menu_level2").click(function(){
+	// 	$(".menu_level2").removeClass("active");
+	// 	$(this).addClass("active");
+	// 	$(".menu_level3").slideUp(300);
+	// 	$(this).siblings(".menu_level3").slideDown(300);
+	// });
+	// $("#tab_menu").on('click','.menu',function(){
+	// 	var text = $(this).find("span.text").text();
+	// 	var uname = uniencode(text);
+	// 	active_tab(uname);
+	// });
+	// $("#tab_menu").on('click','.btn_close',function(){
+	// 	removeTab($(this));
+	// 	return false;
+	// });
 	tabs=$('#tabs').tabs();
 	$('body').layout({applyDefaultStyles:true});
 	$('.sub_menu').accordion();
+
+	tabs.delegate( "span.ui-icon-close", "click", function() {
+      var panelId = $( this ).closest( "li" ).remove().attr( "aria-controls" );
+      $( "#" + panelId ).remove();
+      tabs.tabs( "refresh" );
+    });
 });
 function log(info){
 	return console.log(info);
