@@ -20,14 +20,13 @@ function addTab(menu){
 			}
 		    li = $( tabTemplate.replace( /#\{href\}/g, "#" + id ).replace( /#\{label\}/g, text ) );
 			tabs.find( ".ui-tabs-nav" ).append( li );
+			tabs.append( "<div id='" + id + "'>加载中......</div>" )
+				.tabs( "refresh" )
+				.tabs( "option", 'active',$("#"+id).index()-1 );
 			$.get(href+"?"+ new Date()).success(function(html){
-			    tabs.append( "<div id='" + id + "'>" + html + "</div>" );
-				tabs.tabs( "refresh" );
-				tabs.tabs( "option", 'active',$("#"+id).index()-1 );
+				 tabs.find('#'+id).html(html);
 			}).error(function(d){
-				tabs.append( "<div id='" + id + "'>" + d.responseText + "</div>" );
-				tabs.tabs( "refresh" );
-				tabs.tabs( "option", 'active',$("#"+id).index()-1 );
+				tabs.find('#'+id).html(d.responseText);
 			});
 		}else{
 			return false;
@@ -39,7 +38,9 @@ $(document).ready(function(){
 			addTab($(this));
 		return false;
 	});
-	tabs=$('#tabs').tabs();
+	tabs=$('#tabs').tabs({
+		
+	});
 	var $layout = $('body').layout({
 		applyDefaultStyles:true,
 		west:{size:250}
