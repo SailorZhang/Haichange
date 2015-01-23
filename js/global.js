@@ -39,37 +39,16 @@ function opened_tab(uname){
 	return false;
 }
 $(document).ready(function(){
-	// var h1=$(document).height();
-	//$(".left,.right,.inner").css("height",h1-5);
-	//$(".right .inner .content,.right .inner .content div:first").css("height",h1-113);
-	// $(".menu_level2").first().addClass("active");
-	// $(".menu_level2").first().siblings().slideDown(300);
-	// $(".menu a").click(function(){
-	// 	$(".menu a").removeClass("active");
-	// 	$(this).addClass("active");
-	// });
 	$(".menu_level3 a").click(function(){
 			addTab($(this));
 		return false;
 	});
-	// $(".menu_level2").click(function(){
-	// 	$(".menu_level2").removeClass("active");
-	// 	$(this).addClass("active");
-	// 	$(".menu_level3").slideUp(300);
-	// 	$(this).siblings(".menu_level3").slideDown(300);
-	// });
-	// $("#tab_menu").on('click','.menu',function(){
-	// 	var text = $(this).find("span.text").text();
-	// 	var uname = uniencode(text);
-	// 	active_tab(uname);
-	// });
-	// $("#tab_menu").on('click','.btn_close',function(){
-	// 	removeTab($(this));
-	// 	return false;
-	// });
 	tabs=$('#tabs').tabs();
-	$('body').layout({applyDefaultStyles:true});
-	$('.sub_menu').accordion();
+	var $layout = $('body').layout({
+		applyDefaultStyles:true,
+		west:{size:250}
+	});
+	$('.sub_menu').accordion({collapsible: true});
 
 	tabs.delegate( "span.ui-icon-close", "click", function() {
       var panelId = $( this ).closest( "li" ).remove().attr( "aria-controls" );

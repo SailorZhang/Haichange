@@ -35,6 +35,7 @@ img{border:none;}
 .top{
 	height:60px;
 	background-color:#0054a7;
+	border-radius: 5px;
 }
 /*  logo  */
 .top .logo{
@@ -107,6 +108,10 @@ img{border:none;}
 	color:#fff;
 }
 /*  左侧菜单-三级菜单  */
+.sub_menu h2
+{
+	line-height: 25px;
+}
 .sub_menu .menu_level3{
 	border-bottom:1px solid #ddd;
 	display:none;
@@ -141,6 +146,7 @@ img{border:none;}
 .inner .navgation{
 	height:60px;
 	background-color:#0054a7;
+	border-radius: 5px;
 }
 .inner .navgation a{
 	float:left;
