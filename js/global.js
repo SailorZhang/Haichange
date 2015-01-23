@@ -3,7 +3,7 @@ var tabs,
 maxTabs=6,
 tabTemplate = "<li><a href='#{href}'>#{label}</a> <span class='ui-icon ui-icon-close' role='presentation'>Remove Tab</span></li>";
 function addTab(menu){
-	var href = menu.attr("href")+"?"+ new Date();
+	var href = menu.attr("href");
 	var text = menu.text();
 	var reference = menu.attr('reference');
 		if(href!='#'){
@@ -20,7 +20,7 @@ function addTab(menu){
 			}
 		    li = $( tabTemplate.replace( /#\{href\}/g, "#" + id ).replace( /#\{label\}/g, text ) );
 			tabs.find( ".ui-tabs-nav" ).append( li );
-			$.get(href).success(function(html){
+			$.get(href+"?"+ new Date()).success(function(html){
 			    tabs.append( "<div id='" + id + "'>" + html + "</div>" );
 				tabs.tabs( "refresh" );
 				tabs.tabs( "option", 'active',$("#"+id).index()-1 );
