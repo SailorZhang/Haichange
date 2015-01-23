@@ -1,10 +1,441 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>无标题文档</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<!-- <link href="css/style.css" rel="stylesheet" type="text/css" />
+	-->
+	<!-- <script src="js/jquery.min.js" type="text/javascript" language="javascript"></script>
+-->
+<script type="text/javascript">      
+$(document).ready(function(){
+    /* 当鼠标移到表格上是，当前一行背景变色 */
+    $(".table_list table tbody tr").mouseover(function(){
+        $(".table_list table tbody tr").removeClass("over");
+        $(this).addClass("over");
+    });
+    /* 改变偶数行背景色 */
+    $(".table_list table tbody tr:even").addClass("even");
+    /* 当鼠标在表格上点击时，当前一行背景变色 */
+    $(".table_list table tbody tr").click(function(e){
+        if($(e.target).is("input[type=checkbox]")){
+            $(this).toggleClass("click");
+            e.stopPropagation();
+        }else{
+            $(this).toggleClass("click");
+            var $checkbox = $(this).find("input[type=checkbox]");
+            reverse_check($checkbox);
+        }
+    });
+    /*点击表头的checkbox，进行全选/全不选操作*/
+    $(".table_list table thead tr input[type=checkbox]").click(function(){
+        if($(this).prop("checked") == true){
+            $(".table_list table tbody tr input[type=checkbox]").prop('checked',true);
+            $(".table_list table tbody tr").addClass("click");
+        }else{
+            $(".table_list table tbody tr input[type=checkbox]").prop('checked',false);
+            $(".table_list table tbody tr").removeClass("click");
+        }
+    });
+
+    $('#btn_Add').on('click',function(){
+        $('.table_container',$(this).closest('div[id*=tabs-]')).hide();
+        $('.form-container',$(this).closest('div[id*=tabs-]')).show();
+        return false;
+    });
+
+    $('.cancle').on('click',function(){
+		$('.table_container',$(this).closest('div[id*=tabs-]')).show();
+        $('.form-container',$(this).closest('div[id*=tabs-]')).hide();
+        return false;
+    });
+
+    $('.end a').on('click',function(){
+        $('#dialog-jan0201-update').dialog({
+            modal: true,
+              buttons: {
+                "新增": function() {
+                  $( this ).dialog( "close" );
+                },
+                "取消": function() {
+                  $( this ).dialog( "close" );
+                }
+              }
+        });
+        return false;
+    });
+});
+function reverse_check(checkbox){
+    if(checkbox.prop("checked") == true)
+        checkbox.prop('checked',false);
+    else 
+        checkbox.prop('checked',true);
+}
+</script>
+<title></title>
 </head>
 <body>
-用户维护啊啊啊
+<div class="position">所在位置：系统管理 &gt; 基础信息 &gt; 地区管理</div>
+<div class="table_container">
+	<div class="search_form">
+		<form id="SS001S_search" action="" method="">
+			<div class="search_condition">
+				<table cellpadding="0" cellspacing="0" border="0">
+					<colgroup>
+					<col width="10%" />
+					<col width="15%" />
+					<col width="10%" />
+					<col width="15%" />
+					<col width="10%" />
+					<col width="15%" />
+					<col width="10%" />
+					<col width="15%" />
+				</colgroup>
+				<tr>
+					<td>菜单代码：</td>
+					<td>
+						<input type="text" id="MENU_NO" class="input_text" />
+					</td>
+					<td>父编号：</td>
+					<td>
+						<input type="text" id="PER_MENU_CD" class="input_text" />
+					</td>
+					<td>菜单名：</td>
+					<td>
+						<input type="text" id="MENU_NM" class="input_text" />
+					</td>
+					<td>级别：</td>
+					<td>
+						<select id="MENU_LVL">
+							<option>全部</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td>菜单行为：</td>
+					<td>
+						<input type="text" id="ACTIONS" class="input_text" />
+					</td>
+					<td colspan="6">&nbsp;</td>
+				</tr>
+			</table>
+		</div>
+		<div class="search_buttons">
+			<input type="submit" id="BUTTON_SUBMIT" value="查询" class="input_button" />
+			<input type="reset" id="BUTTON_RESET" value="重置" class="input_button reset" />
+		</div>
+	</form>
+</div>
+<div class="button_toolbar">
+	<input type="button" id="btn_Add"  value="新增" class="input_button" />
+	<input type="button" id="BUTTON_DEL" value="删除" class="input_button" onclick="parent.showPopup();" />
+</div>
+<div class="table_list">
+	<table cellpadding="0" cellspacing="0" border="0">
+		<colgroup>
+		<col width="6%" />
+		<col width="6%" />
+		<col width="10%" />
+		<col width="10%" />
+		<col width="10%" />
+		<col width="10%" />
+		<col width="36%" />
+		<col width="6%" />
+		<col width="6%" />
+	</colgroup>
+	<thead>
+		<tr>
+			<th>序号</th>
+			<th>
+				<input type="checkbox" class="input_checkbox" />
+			</th>
+			<th>菜单代码</th>
+			<th>父编号</th>
+			<th>菜单名</th>
+			<th>级别</th>
+			<th>菜单行为</th>
+			<th>排序</th>
+			<th class="end">操作</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>1</td>
+			<td>
+				<input type="checkbox" class="input_checkbox" />
+			</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td class="end">
+				<a href="SS001S-edit.html" title="修改" class="icon_button">
+					<img src="images/icon_edit.png" />
+				</a>
+			</td>
+		</tr>
+		<tr>
+			<td>2</td>
+			<td>
+				<input type="checkbox" class="input_checkbox" />
+			</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td class="end">
+				<a href="SS001S-edit.html" title="修改" class="icon_button">
+					<img src="images/icon_edit.png" />
+				</a>
+			</td>
+		</tr>
+		<tr>
+			<td>3</td>
+			<td>
+				<input type="checkbox" class="input_checkbox" />
+			</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td class="end">
+				<a href="SS001S-edit.html" title="修改" class="icon_button">
+					<img src="images/icon_edit.png" />
+				</a>
+			</td>
+		</tr>
+		<tr>
+			<td>4</td>
+			<td>
+				<input type="checkbox" class="input_checkbox" />
+			</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td class="end">
+				<a href="SS001S-edit.html" title="修改" class="icon_button">
+					<img src="images/icon_edit.png" />
+				</a>
+			</td>
+		</tr>
+		<tr>
+			<td>5</td>
+			<td>
+				<input type="checkbox" class="input_checkbox" />
+			</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td class="end">
+				<a href="SS001S-edit.html" title="修改" class="icon_button">
+					<img src="images/icon_edit.png" />
+				</a>
+			</td>
+		</tr>
+		<tr>
+			<td>6</td>
+			<td>
+				<input type="checkbox" class="input_checkbox" />
+			</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td class="end">
+				<a href="SS001S-edit.html" title="修改" class="icon_button">
+					<img src="images/icon_edit.png" />
+				</a>
+			</td>
+		</tr>
+		<tr>
+			<td>7</td>
+			<td>
+				<input type="checkbox" class="input_checkbox" />
+			</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td class="end">
+				<a href="SS001S-edit.html" title="修改" class="icon_button">
+					<img src="images/icon_edit.png" />
+				</a>
+			</td>
+		</tr>
+		<tr>
+			<td>8</td>
+			<td>
+				<input type="checkbox" class="input_checkbox" />
+			</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td class="end">
+				<a href="SS001S-edit.html" title="修改" class="icon_button">
+					<img src="images/icon_edit.png" />
+				</a>
+			</td>
+		</tr>
+		<tr>
+			<td>9</td>
+			<td>
+				<input type="checkbox" class="input_checkbox" />
+			</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td class="end">
+				<a href="SS001S-edit.html" title="修改" class="icon_button">
+					<img src="images/icon_edit.png" />
+				</a>
+			</td>
+		</tr>
+		<tr>
+			<td>10</td>
+			<td>
+				<input type="checkbox" class="input_checkbox" />
+			</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td class="end">
+				<a href="SS001S-edit.html" title="修改" class="icon_button">
+					<img src="images/icon_edit.png" />
+				</a>
+			</td>
+		</tr>
+	</tbody>
+</table>
+<div class="pager">
+	<a href="javascript:void(0);" class="icon_button" title="首页">
+		<img src="images/icon_first.png" alt="" />
+	</a>
+	<a href="javascript:void(0);" class="icon_button" title="上一页">
+		<img src="images/icon_prev.png" alt="" />
+	</a>
+	<input type="text" class="input_text" value="1" />
+	<span class="text">/&nbsp;18页</span>
+	<a href="javascript:void(0);" class="icon_button" title="下一页">
+		<img src="images/icon_next.png" alt="" />
+	</a>
+	<a href="javascript:void(0);" class="icon_button" title="尾页">
+		<img src="images/icon_end.png" alt="" />
+	</a>
+	<span class="total">
+		共 <strong>120</strong>
+		条记录
+	</span>
+</div>
+</div>
+</div>
+<div class='form-container'>
+<p class="errorPrompt">出错~</p>
+<div class="table_form">
+<table cellpadding="0" cellspacing="0" border="0">
+	<colgroup>
+	<col width="15%" />
+	<col width="35%" />
+	<col width="15%" />
+	<col width="35%" />
+</colgroup>
+<tr>
+	<th> <strong>*</strong>
+		菜单代码：
+	</th>
+	<td>
+		<input id="MENU_NO" type="text" class="input_text" maxlength="20" />
+	</td>
+	<th>
+		<strong>*</strong>
+		菜单名：
+	</th>
+	<td>
+		<input id="MENU_NM" type="text" class="input_text" maxlength="60" />
+	</td>
+</tr>
+<tr>
+	<th>
+		<strong>*</strong>
+		父编号：
+	</th>
+	<td>
+		<input id="PER_MENU_CD" type="text" class="input_text" />
+	</td>
+	<th>
+		<strong>*</strong>
+		父编号名：
+	</th>
+	<td>
+		<input type="text" class="input_text" />
+	</td>
+</tr>
+<tr>
+	<th>
+		<strong>*</strong>
+		级别：
+	</th>
+	<td>
+		<select id="MENU_LVL">
+			<option>全部</option>
+		</select>
+	</td>
+	<th>
+		<strong>*</strong>
+		排序：
+	</th>
+	<td>
+		<input id="SORT_NO" type="text" class="input_text" />
+	</td>
+</tr>
+<tr>
+	<th>
+		<strong>*</strong>
+		菜单行为：
+	</th>
+	<td colspan="3">
+		<input id="ACTIONS" type="text" class="input_text long" maxlength="150" />
+	</td>
+</tr>
+<tr>
+	<th>
+		<strong>&nbsp;</strong>
+		备注：
+	</th>
+	<td colspan="3">
+		<textarea id="REMARK"></textarea>
+	</td>
+</tr>
+</table>
+</div>
+<div class="button_toolbar_bottom">
+<input type="button" value="保存并新增" class="input_button" />
+<input type="button" value="保存" class="input_button" />
+<input type="button" value="返回" class="input_button cancle" />
+</div>
+</div>
 </body>
 </html>

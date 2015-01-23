@@ -331,7 +331,7 @@ img{border:none;}
 	border-radius:3px;
 }
 /*  列表  */
-.table_list{border-bottom:1px solid #ddd;}
+/*.table_list{border-bottom:1px solid #ddd;}*/
 .table_list table{
 	width:100%;
 	table-layout:fixed;
@@ -377,6 +377,8 @@ img{border:none;}
 	margin:15px 0 0;
 	height:29px;
 	text-align:center;
+	border-top: 1px solid #ddd;
+	padding-top: 15px;
 }
 .pager .icon_button{
 	display:inline-block;
@@ -670,3 +672,4 @@ img{border:none;}
 	background-color:#fef3f3;
 	border-radius:3px;
 }
+.form-container{display:none;}

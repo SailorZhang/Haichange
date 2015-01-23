@@ -35,7 +35,7 @@ function addTab(menu){
 		
 }
 $(document).ready(function(){
-	$(".menu_level3 a").click(function(){
+	$(".sub_menu").on('click','.menu_level3 a',function(){
 			addTab($(this));
 		return false;
 	});
@@ -50,6 +50,13 @@ $(document).ready(function(){
       var panelId = $( this ).closest( "li" ).remove().attr( "aria-controls" );
       $( "#" + panelId ).remove();
       tabs.tabs( "refresh" );
+    });
+
+    $('#navgation').on('click','a',function(){
+    	$(this).addClass('active').siblings().removeClass('active');
+    	$.get('/TIS/sub_menu.html').success(function(data){
+    		$('.sub_menu').html(data).accordion('destroy').accordion({collapsible: true});
+    	});
     });
 });
 function log(info){
