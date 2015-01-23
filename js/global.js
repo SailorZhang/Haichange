@@ -63,11 +63,21 @@ $(document).ready(function(){
     	var matchResult =  $(ele).text().match(/\((.*)\)/);
     	var hotkey = matchResult[1].toLowerCase();
 
-    	var instance = $('a:contains('+matchResult.input+')','#navgation');
+    	var instance = $('a:contains('+ matchResult.input +')','#navgation');
     	$(document).bind('keydown.alt_'+ hotkey ,function(){
     		instance.click();
     	});
+    	
     });
+    $(document).bind('keydown.alt_q' ,function(){
+		var active = tabs.tabs('option','active');
+		if(active!=0)
+			$("span.ui-icon-close",tabs).eq(active-1).trigger('click');
+	});
+
+	$(document).bind('keydown.alt_a' ,function(){
+		$("span.ui-icon-close",tabs).trigger('click');
+	});
 });
 function log(info){
 	return console.log(info);
