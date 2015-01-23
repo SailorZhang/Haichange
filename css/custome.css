@@ -1,0 +1,29 @@
+
+#tabs { margin-top: 1em; }
+#tabs li .ui-icon-close { float: left; margin: 0.4em 0.2em 0 0; cursor: pointer; }
+.ui-state-default a, .ui-state-default a:link{
+    color:#888888;
+}
+.ui-state-active a, .ui-state-active a:link
+{
+    color: #FFFFFF;
+}
+.ui-state-default
+{
+    color: #FFFCFC;
+}
+.ui-state-active
+{
+    color: #F7FAFC;
+}
+.sub_menu{margin-top: 10px;}
+.tabs .ui-state-active a, .ui-state-active a:link
+{
+    color: #FFFFFF;
+}
+.ui-tabs .ui-tabs-nav li{
+    background-color: #fff;
+}
+.ui-tabs .ui-tabs-nav li a{
+    color: #222222;
+}
