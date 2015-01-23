@@ -4,13 +4,21 @@
 .ui-state-default a, .ui-state-default a:link{
     color:#888888;
 }
+
 .ui-state-active a, .ui-state-active a:link
 {
     color: #FFFFFF;
+    background-color: #FFFFFF;
 }
+
+.ui-tabs .ui-tabs-nav .ui-tabs-active 
+{
+    background-color: #FFFFFF;
+}
+
 .ui-state-default
 {
-    color: #FFFCFC;
+    color: #FFFCFC !important;
 }
 .ui-state-active
 {
@@ -22,7 +30,7 @@
     color: #FFFFFF;
 }
 .ui-tabs .ui-tabs-nav li{
-    background-color: #fff;
+    background-color: #F5F5F5;
 }
 .ui-tabs .ui-tabs-nav li a{
     color: #222222;

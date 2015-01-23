@@ -1,9 +1,9 @@
 // JavaScript Document
 var tabs,
-maxTabs=2,
+maxTabs=6,
 tabTemplate = "<li><a href='#{href}'>#{label}</a> <span class='ui-icon ui-icon-close' role='presentation'>Remove Tab</span></li>";
 function addTab(menu){
-	var href = menu.attr("href");
+	var href = menu.attr("href")+"?"+ new Date();
 	var text = menu.text();
 	var reference = menu.attr('reference');
 		if(href!='#'){
@@ -33,10 +33,6 @@ function addTab(menu){
 			return false;
 		}
 		
-}
-function opened_tab(uname){
-	if(window.tab_params["tabs"].indexOf(uname)>=0){ return true; }
-	return false;
 }
 $(document).ready(function(){
 	$(".menu_level3 a").click(function(){
