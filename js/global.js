@@ -58,6 +58,16 @@ $(document).ready(function(){
     		$('.sub_menu').html(data).accordion('destroy').accordion({collapsible: true});
     	});
     });
+
+    $.each($('a','#navgation'),function(index,ele){
+    	var matchResult =  $(ele).text().match(/\((.*)\)/);
+    	var hotkey = matchResult[1].toLowerCase();
+
+    	var instance = $('a:contains('+matchResult.input+')','#navgation');
+    	$(document).bind('keydown.alt_'+ hotkey ,function(){
+    		instance.click();
+    	});
+    });
 });
 function log(info){
 	return console.log(info);
