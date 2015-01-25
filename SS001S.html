@@ -1,21 +1,5 @@
-<!DOCTYPE HTML>
-<html>
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <!-- <link href="css/style.css" rel="stylesheet" type="text/css" />
-    -->
-    <!-- <script src="js/jquery.min.js" type="text/javascript" language="javascript"></script>
--->
 <script type="text/javascript">      
 $(document).ready(function(){
-    /* 当鼠标移到表格上是，当前一行背景变色 */
-    $(".table_list table tbody tr").mouseover(function(){
-        $(".table_list table tbody tr").removeClass("over");
-        $(this).addClass("over");
-    });
-    /* 改变偶数行背景色 */
-    $(".table_list table tbody tr:even").addClass("even");
-    /* 当鼠标在表格上点击时，当前一行背景变色 */
     $(".table_list table tbody tr").click(function(e){
         if($(e.target).is("input[type=checkbox]")){
             $(this).toggleClass("click");
@@ -74,8 +58,6 @@ function reverse_check(checkbox){
         checkbox.prop('checked',true);
 }
 </script>
-<title></title>
-</head>
 <body>
 <div class="position">所在位置：系统管理 &gt; 基础信息 &gt; 地区管理</div>
 <div class="search_form">
@@ -334,26 +316,25 @@ function reverse_check(checkbox){
 </table>
 <div class="pager">
 <a href="javascript:void(0);" class="icon_button" title="首页">
-<img src="images/icon_first.png" alt="" />
+    <img src="images/icon_first.png" alt="" />
 </a>
 <a href="javascript:void(0);" class="icon_button" title="上一页">
-<img src="images/icon_prev.png" alt="" />
+    <img src="images/icon_prev.png" alt="" />
 </a>
 <input type="text" class="input_text" value="1" />
 <span class="text">/&nbsp;18页</span>
 <a href="javascript:void(0);" class="icon_button" title="下一页">
-<img src="images/icon_next.png" alt="" />
+    <img src="images/icon_next.png" alt="" />
 </a>
 <a href="javascript:void(0);" class="icon_button" title="尾页">
-<img src="images/icon_end.png" alt="" />
+    <img src="images/icon_end.png" alt="" />
 </a>
 <span class="total">
-共 <strong>120</strong>
-条记录
+    共 <strong>120</strong>
+    条记录
 </span>
 </div>
 </div>
-
 
 <div id="dialog-jan0201-insert" style='display:none' title="公司增加">
 
@@ -503,4 +484,3 @@ function reverse_check(checkbox){
 </table>
 </div>
 </body>
-</html>

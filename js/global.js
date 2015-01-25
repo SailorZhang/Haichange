@@ -70,13 +70,13 @@ $(document).ready(function(){
     	});
     	
     });
+
     $(document).bind('keydown.alt_q' ,function(){
 		var active = tabs.tabs('option','active');
-		if(active!=0)
+		if(active!=0){
 			$("span.ui-icon-close",tabs).eq(active-1).trigger('click');
-	});
-
-	$(document).bind('keydown.alt_a' ,function(){
+		}
+	}).bind('keydown.alt_a' ,function(){
 		$("span.ui-icon-close",tabs).trigger('click');
 	});
 });

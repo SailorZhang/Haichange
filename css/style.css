@@ -316,9 +316,10 @@ img{border:none;}
 	width:100%;
 	table-layout:fixed;
 }
-.table_list table tr.even{background-color:#f7f7f7;}
-.table_list table tr.odd{background-color:#fff;}
-.table_list table tr.over{background-color:#d5f4fe;}
+.table_list table tr:nth-child(even){background-color:#f7f7f7;}
+.table_list table tr:nth-child(odd){background-color:#fff;}
+.table_list table tbody tr:hover{background-color:#d5f4fe;}
+/*.table_list table tr.over{background-color:#d5f4fe;}*/
 .table_list table tr.click{background-color:#ddd;}
 .table_list table th{
 	padding:0px 10px;

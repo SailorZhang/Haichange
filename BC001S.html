@@ -1,21 +1,5 @@
-<!DOCTYPE HTML>
-<html>
-<head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	<!-- <link href="css/style.css" rel="stylesheet" type="text/css" />
-	-->
-	<!-- <script src="js/jquery.min.js" type="text/javascript" language="javascript"></script>
--->
 <script type="text/javascript">      
 $(document).ready(function(){
-    /* 当鼠标移到表格上是，当前一行背景变色 */
-    $(".table_list table tbody tr").mouseover(function(){
-        $(".table_list table tbody tr").removeClass("over");
-        $(this).addClass("over");
-    });
-    /* 改变偶数行背景色 */
-    $(".table_list table tbody tr:even").addClass("even");
-    /* 当鼠标在表格上点击时，当前一行背景变色 */
     $(".table_list table tbody tr").click(function(e){
         if($(e.target).is("input[type=checkbox]")){
             $(this).toggleClass("click");
@@ -71,8 +55,6 @@ function reverse_check(checkbox){
         checkbox.prop('checked',true);
 }
 </script>
-<title></title>
-</head>
 <body>
 <div class="position">所在位置：系统管理 &gt; 基础信息 &gt; 地区管理</div>
 <div class="table_container">
@@ -438,4 +420,3 @@ function reverse_check(checkbox){
 </div>
 </div>
 </body>
-</html>
