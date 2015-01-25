@@ -54,71 +54,49 @@ img{border:none;}
 }
 /*  用户信息  */
 .user{
-	height:89px;
+	height:92px;
 }
 .user .info{
 	padding:15px 0 0;
-	height:24px;
+	/*height:24px;*/
 }
 .user .info .name{
-	float:left;
+	/*float:left;*/
 	padding:0 0 0 10px;
-	width:100px;
+	width:100%;
 	height:24px;
 	line-height:24px;
 	font-size:20px;
 	color:#000;
 }
 .user .info .links{
-	float:right;
+	/*float:right;*/
 	height:24px;
+	display: block;
+	padding:5px 0 0 10px;
 }
 .user .info .links a{
-	float:left;
+	/*float:left;*/
 	margin:0 5px 0 0;
 	width:24px;
 	height:24px;
 }
 .user .time{
-	margin:10px 0 0;
-	padding:0px 10px;
+	/*margin:10px 0 0;*/
+	padding:5px 0 0 10px;
 	height:24px;
 	line-height:24px;
 	font-size:12px;
 	color:#888;
 }
 /*  左侧菜单  */
-.sub_menu{}
-/*  左侧菜单-二级菜单  */
-/*.sub_menu .menu_level2{
-	padding:0 0 0 15px;
-	height:43px;
-	line-height:43px;
-	border-bottom:1px solid #ddd;
-	background:#f1f1f1 url(../images/icon_arrow_default.png) 205px center no-repeat;
-	font-size:12px;
-	color:#333;
-	cursor:pointer;
-}
-.sub_menu .menu_level2.active{
-	height:44px;
-	line-height:44px;
-	border:none;
-	background:#0054a7 url(../images/icon_arrow_hover.png) 205px center no-repeat;
-	color:#fff;
-}
 /*  左侧菜单-三级菜单  */
 .sub_menu h2
 {
 	line-height: 25px;
 }
-.sub_menu .menu_level3{
-	/*border-bottom:1px solid #ddd;*/
-	display:none;
-}
 .sub_menu .menu_level3 a{
 	display:block;
-	/*padding-left:25px;*/
 	height:35px;
 	line-height:35px;
 	font-size:12px;
@@ -127,7 +105,7 @@ img{border:none;}
 	cursor:pointer;
 }
 .sub_menu .menu_level3 a:hover{font-weight:bold;background-color:#eef1f4;}
-.sub_menu .menu_level3 a.active{background-color:#e4e7ea;}*/
+.sub_menu .menu_level3 a.active{background-color:#e4e7ea;}
 /*  right  */
 .right
 	/*float:left;*/
@@ -147,9 +125,11 @@ img{border:none;}
 	height:60px;
 	background-color:#0054a7;
 	border-radius: 5px;
+	overflow: auto;
 }
 .inner .navgation a{
-	float:left;
+	/*float:left;*/
+	padding:22px 0;
 	margin:0 15px;
 	height:60px;
 	line-height:60px;
