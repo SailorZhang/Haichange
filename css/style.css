@@ -107,8 +107,8 @@ img{border:none;}
 .sub_menu .menu_level3 a:hover{font-weight:bold;background-color:#eef1f4;}
 .sub_menu .menu_level3 a.active{background-color:#e4e7ea;}
 /*  right  */
-.right
-	/*float:left;*/
+.right {
+	width:60px;
 	margin-left:230px;
 	min-height:500px;
 	min-width:890px;
