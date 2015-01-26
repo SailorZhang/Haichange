@@ -45,7 +45,7 @@ $(document).ready(function(){
 		applyDefaultStyles:true,
 		west:{size:250}
 	});
-	$('.sub_menu').accordion({collapsible: true});
+	$('.sub_menu').accordion({collapsible: true,heightStyle: "content"});
 
 	tabs.delegate( "span.ui-icon-close", "click", function() {
       var panelId = $( this ).closest( "li" ).remove().attr( "aria-controls" );
@@ -55,9 +55,11 @@ $(document).ready(function(){
 
     $('#navgation').on('click','a',function(){
     	$(this).addClass('active').siblings().removeClass('active');
-    	$.get('/TIS/sub_menu.html').success(function(data){
-    		$('.sub_menu').html(data).accordion('destroy').accordion({collapsible: true});
+    	var href = $(this).attr('href')+"?"+new Date();
+    	$.get(href).success(function(data){
+    		$('.sub_menu').html(data).accordion('destroy').accordion({collapsible: true,heightStyle: "content"});
     	});
+    	return false;
     });
 
     $.each($('a','#navgation'),function(index,ele){

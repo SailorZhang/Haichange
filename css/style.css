@@ -97,8 +97,9 @@ img{border:none;}
 }
 .sub_menu .menu_level3 a{
 	display:block;
-	height:35px;
-	line-height:35px;
+	/*height:35px;*/
+	/*line-height:30px;*/
+	padding:10px 0;
 	font-size:12px;
 	color:#333;
 	text-decoration:none;
