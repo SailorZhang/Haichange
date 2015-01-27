@@ -352,6 +352,7 @@ img{border:none;}
 	margin:7px 5px 0;
 	width:16px;
 	height:16px;
+	cursor:pointer;
 }
 .table_list table .end{border-right:none !important;}
 /*  分页  */
@@ -692,5 +693,9 @@ img{border:none;}
 }
 .width24{
 	width:24%;
+}
+.width50
+{
+	width:49%;
 }
 
