@@ -422,6 +422,7 @@ img{border:none;}
 }
 .table_form table th{
 	text-align:left;
+	padding-left:10px;
 	line-height:27px;
 	font-weight:normal;
 }
@@ -435,9 +436,9 @@ img{border:none;}
 	padding:5px 0;
 }
 .table_form table td .input_text{
-	float:left;
-	padding:0px 10px;
-	width:85%;
+	/*float:left;*/
+	/*padding:0 10px;*/
+	width:100%;
 	height:25px;
 	line-height:25px;
 	border:1px solid #ddd;
@@ -447,8 +448,8 @@ img{border:none;}
 .table_form table td .readonly{background-color:#f1f1f1;}
 .table_form table td .long{width:94%;}
 .table_form table td select{
-	float:left;
-	width:90%;
+	/*float:left;*/
+	width:100%;
 	height:27px;
 	line-height:27px;
 	border:1px solid #ddd;
@@ -456,9 +457,9 @@ img{border:none;}
 	border-radius:3px;
 }
 .table_form table td textarea{
-	float:left;
+	/*float:left;*/
 	padding:10px 0 10px 10px;
-	width:95%;
+	width:100%;
 	height:100px;
 	line-height:18px;
 	border:1px solid #ddd;
@@ -655,47 +656,21 @@ img{border:none;}
 	background-color:#fef3f3;
 	border-radius:3px;
 }
-.form-container{display:none;}
+.invisible-container{display:none;}
 
-/*.search_condition  .input_text{
-	padding:0px 10px;
+.pop_container {
+	width:90%;
+}
+.pop_container td{
+	padding:5px 0;
+}
+.pop_container input, .pop_container select{
+	/*float:left;*/
+	/*padding:0px 10px;*/
+	width:100%;
 	height:25px;
 	line-height:25px;
 	border:1px solid #ddd;
 	background-color:#fff;
 	border-radius:3px;
-	width: 40%;
 }
-
-.search_condition select {
-	width: 46%;
-	height: 27px;
-	line-height: 27px;
-	border: 1px solid #ddd;
-	background-color: #fff;
-	border-radius: 3px;
-}
-
-.search_condition em
-{
-	display: inline-block;
-	font-style: normal;
-	padding:5px 0;
-}
-.search_condition span
-{
-	width: 80px;
-	display: inline-block;
-	text-align: right;
-}
-.width33{
-	width:33%;
-}
-.width24{
-	width:24%;
-}
-.width50
-{
-	width:49%;
-}*/
-

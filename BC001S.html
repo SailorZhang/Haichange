@@ -1,65 +1,42 @@
 <script type="text/javascript">      
 $(document).ready(function(){
-    $(".table_list table tbody tr").click(function(e){
-        if($(e.target).is("input[type=checkbox]")){
-            $(this).toggleClass("click");
-            e.stopPropagation();
-        }else{
-            $(this).toggleClass("click");
-            var $checkbox = $(this).find("input[type=checkbox]");
-            reverse_check($checkbox);
-        }
-    });
+    var update_BC001S_id = 0;
     /*点击表头的checkbox，进行全选/全不选操作*/
-    $(".table_list table thead tr input[type=checkbox]").click(function(){
-        if($(this).prop("checked") == true){
-            $(".table_list table tbody tr input[type=checkbox]").prop('checked',true);
-            $(".table_list table tbody tr").addClass("click");
-        }else{
-            $(".table_list table tbody tr input[type=checkbox]").prop('checked',false);
-            $(".table_list table tbody tr").removeClass("click");
-        }
+    $("#BC001S_table_list thead :checkbox").click(function(){
+        var checkAll = $(this).is(":checked");
+        $('#BC001S_table_list tbody :checkbox').closest('tr')[checkAll?'addClass':'removeClass']('click').end().prop('checked',checkAll);
     });
 
-    $('#btn_Add').on('click',function(){
-        $('.table_container',$(this).closest('div[id*=tabs-]')).hide();
-        $('.form-container',$(this).closest('div[id*=tabs-]')).show();
-        return false;
+    $('#BC001S_table_list').on('click','tbody :checkbox',function(e){
+            $(this).closest('tr')[$(this).is(':checked')?'addClass':'removeClass']('click');
     });
 
-    $('.cancle').on('click',function(){
-		$('.table_container',$(this).closest('div[id*=tabs-]')).show();
-        $('.form-container',$(this).closest('div[id*=tabs-]')).hide();
-        return false;
+    $('#BC001S_btnAdd').on('click',function(){
+        $('#BC001S_insert_panel').show();
+        $('#BC001S_container').hide();
     });
 
-    $('.end a').on('click',function(){
-        $('#dialog-jan0201-update').dialog({
-            modal: true,
-              buttons: {
-                "新增": function() {
-                  $( this ).dialog( "close" );
-                },
-                "取消": function() {
-                  $( this ).dialog( "close" );
-                }
-              }
-        });
-        return false;
+    $('#BC001S_insert_btn_back').on('click',function(){
+		$('#BC001S_insert_panel').hide();
+        $('#BC001S_container').show();
     });
-});
-function reverse_check(checkbox){
-    if(checkbox.prop("checked") == true)
-        checkbox.prop('checked',false);
-    else 
-        checkbox.prop('checked',true);
-}
+
+    $('#BC001S_update_btn_back').on('click',function(){
+		$('#BC001S_insert_panel').hide();
+        $('#BC001S_container').show();
+    });
+ });
+
+function BC001S_modify(obj){
+		$('#BC001S_update_panel').show();
+        $('#BC001S_container').hide();
+        return false;
+    }
 </script>
-<body>
-<div class="position">所在位置：系统管理 &gt; 基础信息 &gt; 地区管理</div>
-<div class="table_container">
+<div id='BC001S_container'>
+	<div class="position">所在位置：系统管理 &gt; 基础信息 &gt; 地区管理</div>
 	<div class="search_form">
-		<form id="SS001S_search" action="" method="">
+		<form id="BC001S_search" action="" method="">
 			<div class="search_condition">
 				<table cellpadding="0" cellspacing="0" border="0">
 					<colgroup>
@@ -94,24 +71,24 @@ function reverse_check(checkbox){
 				</tr>
 				<tr>
 					<th>菜单行为：</th>
-					<td>
+					<td colspan="3">
 						<input type="text" id="ACTIONS" class="input_text" />
 					</td>
-					<td colspan="6">&nbsp;</td>
+					<td colspan="4"></td>
 				</tr>
 			</table>
 		</div>
 		<div class="search_buttons">
-			<input type="submit" id="BUTTON_SUBMIT" value="查询" class="input_button" />
-			<input type="reset" id="BUTTON_RESET" value="重置" class="input_button reset" />
+			<input type="submit" id="BC001S_btnSearch" value="查询" class="input_button" />
+			<input type="reset" id="BC001S_btnReset" value="重置" class="input_button reset" />
 		</div>
 	</form>
 </div>
 <div class="button_toolbar">
-	<input type="button" id="btn_Add"  value="新增" class="input_button" />
-	<input type="button" id="BUTTON_DEL" value="删除" class="input_button" onclick="parent.showPopup();" />
+	<input type="button" id="BC001S_btnAdd"  value="新增" class="input_button" />
+	<input type="button" id="BC001S_btnDelete" value="删除" class="input_button"/>
 </div>
-<div class="table_list">
+<div class="table_list" id='BC001S_table_list'>
 	<table cellpadding="0" cellspacing="0" border="0">
 		<colgroup>
 		<col width="6%" />
@@ -145,14 +122,14 @@ function reverse_check(checkbox){
 			<td>
 				<input type="checkbox" class="input_checkbox" />
 			</td>
-			<td>&nbsp;</td>
-			<td>&nbsp;</td>
-			<td>&nbsp;</td>
-			<td>&nbsp;</td>
-			<td>&nbsp;</td>
-			<td>&nbsp;</td>
+			<td>BC001S</td>
+			<td>0</td>
+			<td>基础信息</td>
+			<td>1</td>
+			<td>BasicInfo</td>
+			<td>1</td>
 			<td class="end">
-				<a href="SS001S-edit.html" title="修改" class="icon_button">
+				<a title="修改" class="icon_button" onclick="return BC001S_modify({Id:1,Code:'BC001S',Parent:0,Name:'基础信息',Grade:1,Action:'BasicInfo',Sort:1});">
 					<img src="images/icon_edit.png" />
 				</a>
 			</td>
@@ -162,150 +139,14 @@ function reverse_check(checkbox){
 			<td>
 				<input type="checkbox" class="input_checkbox" />
 			</td>
-			<td>&nbsp;</td>
-			<td>&nbsp;</td>
-			<td>&nbsp;</td>
-			<td>&nbsp;</td>
-			<td>&nbsp;</td>
-			<td>&nbsp;</td>
+			<td>SS002S</td>
+			<td>0</td>
+			<td>办公管理</td>
+			<td>2</td>
+			<td>OfficeManagement</td>
+			<td>2</td>
 			<td class="end">
-				<a href="SS001S-edit.html" title="修改" class="icon_button">
-					<img src="images/icon_edit.png" />
-				</a>
-			</td>
-		</tr>
-		<tr>
-			<td>3</td>
-			<td>
-				<input type="checkbox" class="input_checkbox" />
-			</td>
-			<td>&nbsp;</td>
-			<td>&nbsp;</td>
-			<td>&nbsp;</td>
-			<td>&nbsp;</td>
-			<td>&nbsp;</td>
-			<td>&nbsp;</td>
-			<td class="end">
-				<a href="SS001S-edit.html" title="修改" class="icon_button">
-					<img src="images/icon_edit.png" />
-				</a>
-			</td>
-		</tr>
-		<tr>
-			<td>4</td>
-			<td>
-				<input type="checkbox" class="input_checkbox" />
-			</td>
-			<td>&nbsp;</td>
-			<td>&nbsp;</td>
-			<td>&nbsp;</td>
-			<td>&nbsp;</td>
-			<td>&nbsp;</td>
-			<td>&nbsp;</td>
-			<td class="end">
-				<a href="SS001S-edit.html" title="修改" class="icon_button">
-					<img src="images/icon_edit.png" />
-				</a>
-			</td>
-		</tr>
-		<tr>
-			<td>5</td>
-			<td>
-				<input type="checkbox" class="input_checkbox" />
-			</td>
-			<td>&nbsp;</td>
-			<td>&nbsp;</td>
-			<td>&nbsp;</td>
-			<td>&nbsp;</td>
-			<td>&nbsp;</td>
-			<td>&nbsp;</td>
-			<td class="end">
-				<a href="SS001S-edit.html" title="修改" class="icon_button">
-					<img src="images/icon_edit.png" />
-				</a>
-			</td>
-		</tr>
-		<tr>
-			<td>6</td>
-			<td>
-				<input type="checkbox" class="input_checkbox" />
-			</td>
-			<td>&nbsp;</td>
-			<td>&nbsp;</td>
-			<td>&nbsp;</td>
-			<td>&nbsp;</td>
-			<td>&nbsp;</td>
-			<td>&nbsp;</td>
-			<td class="end">
-				<a href="SS001S-edit.html" title="修改" class="icon_button">
-					<img src="images/icon_edit.png" />
-				</a>
-			</td>
-		</tr>
-		<tr>
-			<td>7</td>
-			<td>
-				<input type="checkbox" class="input_checkbox" />
-			</td>
-			<td>&nbsp;</td>
-			<td>&nbsp;</td>
-			<td>&nbsp;</td>
-			<td>&nbsp;</td>
-			<td>&nbsp;</td>
-			<td>&nbsp;</td>
-			<td class="end">
-				<a href="SS001S-edit.html" title="修改" class="icon_button">
-					<img src="images/icon_edit.png" />
-				</a>
-			</td>
-		</tr>
-		<tr>
-			<td>8</td>
-			<td>
-				<input type="checkbox" class="input_checkbox" />
-			</td>
-			<td>&nbsp;</td>
-			<td>&nbsp;</td>
-			<td>&nbsp;</td>
-			<td>&nbsp;</td>
-			<td>&nbsp;</td>
-			<td>&nbsp;</td>
-			<td class="end">
-				<a href="SS001S-edit.html" title="修改" class="icon_button">
-					<img src="images/icon_edit.png" />
-				</a>
-			</td>
-		</tr>
-		<tr>
-			<td>9</td>
-			<td>
-				<input type="checkbox" class="input_checkbox" />
-			</td>
-			<td>&nbsp;</td>
-			<td>&nbsp;</td>
-			<td>&nbsp;</td>
-			<td>&nbsp;</td>
-			<td>&nbsp;</td>
-			<td>&nbsp;</td>
-			<td class="end">
-				<a href="SS001S-edit.html" title="修改" class="icon_button">
-					<img src="images/icon_edit.png" />
-				</a>
-			</td>
-		</tr>
-		<tr>
-			<td>10</td>
-			<td>
-				<input type="checkbox" class="input_checkbox" />
-			</td>
-			<td>&nbsp;</td>
-			<td>&nbsp;</td>
-			<td>&nbsp;</td>
-			<td>&nbsp;</td>
-			<td>&nbsp;</td>
-			<td>&nbsp;</td>
-			<td class="end">
-				<a href="SS001S-edit.html" title="修改" class="icon_button">
+				<a title="修改" class="icon_button" onclick="return BC001S_modify({Id:2,Code:'SS002S',Parent:0,Name:'办公管理',Grade:2,Action:'OfficeManagement',Sort:2});">
 					<img src="images/icon_edit.png" />
 				</a>
 			</td>
@@ -334,89 +175,185 @@ function reverse_check(checkbox){
 </div>
 </div>
 </div>
-<div class='form-container'>
-<p class="errorPrompt">出错~</p>
-<div class="table_form">
-<table cellpadding="0" cellspacing="0" border="0">
-	<colgroup>
-	<col width="15%" />
-	<col width="35%" />
-	<col width="15%" />
-	<col width="35%" />
-</colgroup>
-<tr>
-	<th> <strong>*</strong>
-		菜单代码：
-	</th>
-	<td>
-		<input id="MENU_NO" type="text" class="input_text" maxlength="20" />
-	</td>
-	<th>
-		<strong>*</strong>
-		菜单名：
-	</th>
-	<td>
-		<input id="MENU_NM" type="text" class="input_text" maxlength="60" />
-	</td>
-</tr>
-<tr>
-	<th>
-		<strong>*</strong>
-		父编号：
-	</th>
-	<td>
-		<input id="PER_MENU_CD" type="text" class="input_text" />
-	</td>
-	<th>
-		<strong>*</strong>
-		父编号名：
-	</th>
-	<td>
-		<input type="text" class="input_text" />
-	</td>
-</tr>
-<tr>
-	<th>
-		<strong>*</strong>
-		级别：
-	</th>
-	<td>
-		<select id="MENU_LVL">
-			<option>全部</option>
-		</select>
-	</td>
-	<th>
-		<strong>*</strong>
-		排序：
-	</th>
-	<td>
-		<input id="SORT_NO" type="text" class="input_text" />
-	</td>
-</tr>
-<tr>
-	<th>
-		<strong>*</strong>
-		菜单行为：
-	</th>
-	<td colspan="3">
-		<input id="ACTIONS" type="text" class="input_text long" maxlength="150" />
-	</td>
-</tr>
-<tr>
-	<th>
-		<strong>&nbsp;</strong>
-		备注：
-	</th>
-	<td colspan="3">
-		<textarea id="REMARK"></textarea>
-	</td>
-</tr>
-</table>
+<div class='invisible-container' id='BC001S_insert_panel'>
+	<p class="errorPrompt">出错~</p>
+	<div class="table_form">
+		<table cellpadding="0" cellspacing="0" border="0">
+			<colgroup>
+			<col width="13%" />
+			<col width="20%" />
+			<col width="13%" />
+			<col width="20%" />
+			<col width="13%" />
+			<col width="20%" />
+		</colgroup>
+		<tr>
+			<th> <strong>*</strong>
+				菜单代码：
+			</th>
+			<td>
+				<input id="MENU_NO" type="text" class="input_text" maxlength="20" />
+			</td>
+			<th> <strong>*</strong>
+				菜单名：
+			</th>
+			<td>
+				<input id="MENU_NM" type="text" class="input_text" maxlength="60" />
+			</td>
+			<td colspan="2"></td>
+		</tr>
+		<tr>
+			<th>
+				<strong>*</strong>
+				父编号：
+			</th>
+			<td>
+				<input id="PER_MENU_CD" type="text" class="input_text" />
+			</td>
+			<th>
+				<strong>*</strong>
+				父编号名：
+			</th>
+			<td>
+				<input type="text" class="input_text" />
+			</td>
+			<td colspan="2"></td>
+		</tr>
+		<tr>
+			<th>
+				<strong>*</strong>
+				级别：
+			</th>
+			<td>
+				<select id="MENU_LVL">
+					<option>全部</option>
+				</select>
+			</td>
+			<th>
+				<strong>*</strong>
+				排序：
+			</th>
+			<td>
+				<input id="SORT_NO" type="text" class="input_text" />
+			</td>
+			<td colspan="2"></td>
+		</tr>
+		<tr>
+			<th>
+				<strong>*</strong>
+				菜单行为：
+			</th>
+			<td>
+				<input id="ACTIONS" type="text" class="input_text" maxlength="150" />
+			</td>
+			<td colspan="4"></td>
+		</tr>
+		<tr>
+			<th>
+				<strong>&nbsp;</strong>
+				备注：
+			</th>
+			<td colspan="3">
+				<textarea id="REMARK"></textarea>
+			</td>
+			<td colspan="2"></td>
+		</tr>
+	</table>
 </div>
 <div class="button_toolbar_bottom">
-<input type="button" value="保存并新增" class="input_button" />
-<input type="button" value="保存" class="input_button" />
-<input type="button" value="返回" class="input_button cancle" />
+	<input type="button" value="保存并新增" id='BC001S_insert_btn_save_insert' class="input_button" />
+	<input type="button" value="保存" id='BC001S_insert_btn_save'  class="input_button" />
+	<input type="button" value="返回" id='BC001S_insert_btn_back' class="input_button cancle" />
 </div>
 </div>
-</body>
+<div class='invisible-container' id='BC001S_update_panel'>
+	<p class="errorPrompt">出错~</p>
+	<div class="table_form">
+		<table cellpadding="0" cellspacing="0" border="0">
+			<colgroup>
+			<col width="13%" />
+			<col width="20%" />
+			<col width="13%" />
+			<col width="20%" />
+			<col width="13%" />
+			<col width="20%" />
+		</colgroup>
+		<tr>
+			<th> <strong>*</strong>
+				菜单代码：
+			</th>
+			<td>
+				<input id="MENU_NO" type="text" class="input_text" maxlength="20" />
+			</td>
+			<th> <strong>*</strong>
+				菜单名：
+			</th>
+			<td>
+				<input id="MENU_NM" type="text" class="input_text" maxlength="60" />
+			</td>
+			<td colspan="2"></td>
+		</tr>
+		<tr>
+			<th>
+				<strong>*</strong>
+				父编号：
+			</th>
+			<td>
+				<input id="PER_MENU_CD" type="text" class="input_text" />
+			</td>
+			<th>
+				<strong>*</strong>
+				父编号名：
+			</th>
+			<td>
+				<input type="text" class="input_text" />
+			</td>
+			<td colspan="2"></td>
+		</tr>
+		<tr>
+			<th>
+				<strong>*</strong>
+				级别：
+			</th>
+			<td>
+				<select id="MENU_LVL">
+					<option>全部</option>
+				</select>
+			</td>
+			<th>
+				<strong>*</strong>
+				排序：
+			</th>
+			<td>
+				<input id="SORT_NO" type="text" class="input_text" />
+			</td>
+			<td colspan="2"></td>
+		</tr>
+		<tr>
+			<th>
+				<strong>*</strong>
+				菜单行为：
+			</th>
+			<td colspan="3">
+				<input id="ACTIONS" type="text" class="input_text" maxlength="150" />
+			</td>
+			<td colspan="2"></td>
+		</tr>
+		<tr>
+			<th>
+				<strong>&nbsp;</strong>
+				备注：
+			</th>
+			<td colspan="3">
+				<textarea id="REMARK"></textarea>
+			</td>
+			<td colspan="2"></td>
+		</tr>
+	</table>
+</div>
+<div class="button_toolbar_bottom">
+	<input type="button" value="保存并新增" id='BC001S_update_btn_save_insert' class="input_button" />
+	<input type="button" value="保存" id='BC001S_update_btn_save'  class="input_button" />
+	<input type="button" value="返回" id='BC001S_update_btn_back' class="input_button cancle" />
+</div>
+</div>
