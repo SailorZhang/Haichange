@@ -449,7 +449,7 @@ img{border:none;}
 .table_form table td .long{width:94%;}
 .table_form table td select{
 	/*float:left;*/
-	width:90%;
+	width:91%;
 	height:27px;
 	line-height:27px;
 	border:1px solid #ddd;
@@ -459,7 +459,7 @@ img{border:none;}
 .table_form table td textarea{
 	/*float:left;*/
 	padding:10px 0 10px 10px;
-	width:90%;
+	width:95%;
 	height:100px;
 	line-height:18px;
 	border:1px solid #ddd;
@@ -669,8 +669,6 @@ img{border:none;}
 	padding:5px 0;
 }
 .pop_container input, .pop_container select{
-	/*float:left;*/
-	/*padding:0px 10px;*/
 	width:90%;
 	height:25px;
 	line-height:25px;
@@ -678,6 +676,9 @@ img{border:none;}
 	background-color:#fff;
 	border-radius:3px;
 }
+ .pop_container select{
+ 	width:91%;
+ }
 
 input.error,select.error{border-color:red !important;}
 span.error{
