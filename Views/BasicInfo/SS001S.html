@@ -1,3 +1,7 @@
+<style>
+    .success{border-color:green !important;}
+    .error{border-color:red !important;}
+</style>
 <script type="text/javascript">      
 $(document).ready(function(){
     // var update_SS001S_id = 0;
@@ -23,6 +27,7 @@ $(document).ready(function(){
             modal: true,
               buttons: {
                 "新增": function() {
+                    console.log($('#dialog_SS001S_insert_form').valid());
                     alert('菜单代码：'+ $('#add_SS001S_code').val());
                 },
                 "取消": function() {
@@ -32,6 +37,7 @@ $(document).ready(function(){
         });
         return false;
     });
+    $('#dialog_SS001S_insert_form').validate();
  });
 
 function SS001S_modify(obj){
@@ -191,19 +197,18 @@ function SS001S_modify(obj){
         <img src="images/icon_end.png" alt="" />
     </a>
     <span class="total">
-        共 <strong>120</strong>
-        条记录
+        共 <strong>120</strong>条记录
     </span>
 </div>
 </div>
 
 <div id="dialog_SS001S_insert" class="invisible-container" title="菜单增加">
-
+<form id="dialog_SS001S_insert_form">
 <table class='pop_container'>
     <tr>
         <td>菜单代码</td>
         <td>
-            <input type="text" name="" id="add_SS001S_code" type="text"/>
+            <input type="text" name="add_SS001S_code" required id="add_SS001S_code" type="text"/>
         </td>
     </tr>
     <tr>
@@ -238,6 +243,7 @@ function SS001S_modify(obj){
         </td>
     </tr>
 </table>
+</form>
 </div>
 
 <div id="dialog_SS001S_update"  class='invisible-container'  title="菜单修改">
