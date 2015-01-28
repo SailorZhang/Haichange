@@ -1,14 +1,21 @@
-<script type="text/javascript">      
+<script type="text/javascript">   
+var update_BC001S_id = 0;
 $(document).ready(function(){
-    var update_BC001S_id = 0;
     /*点击表头的checkbox，进行全选/全不选操作*/
-    $("#BC001S_table_list thead :checkbox").click(function(){
+    $("#BC001S_table_list").on('click','thead :checkbox',function(){
         var checkAll = $(this).is(":checked");
         $('#BC001S_table_list tbody :checkbox').closest('tr')[checkAll?'addClass':'removeClass']('click').end().prop('checked',checkAll);
     });
 
     $('#BC001S_table_list').on('click','tbody :checkbox',function(e){
             $(this).closest('tr')[$(this).is(':checked')?'addClass':'removeClass']('click');
+    });
+
+    $('#BC001S_table_list').on('click','.pager a',function(){
+    	$.get($(this).attr('href'),function(data){
+    		$('#BC001S_table_list').html(data);
+    	});
+    	return false;
     });
 
     $('#BC001S_btnAdd').on('click',function(){
@@ -22,19 +29,53 @@ $(document).ready(function(){
     });
 
     $('#BC001S_update_btn_back').on('click',function(){
-		$('#BC001S_insert_panel').hide();
+		$('#BC001S_update_panel').hide();
         $('#BC001S_container').show();
     });
+
+    $('#BC001S_update_btn_save_insert').on('click',function(){
+		$('#BC001S_update_panel').hide();
+        $('#BC001S_container').show();
+        alert('保存成功。保存Id'+update_BC001S_id);
+    });
+
+    $('#BC001S_update_btn_save').on('click',function(){
+		$('#BC001S_update_panel_error').text('后台服务器错误').show();
+        alert('保存失败。保存Id'+update_BC001S_id);
+    });
+
+    $('#BC001S_insert_btn_save_insert').on('click',function(){
+		// $('#BC001S_insert_panel').hide();
+  //       $('#BC001S_container').show();
+  //       alert('保存成功');
+  		$('#BC001S_insert_panel_form').valid();
+    });
+
+    $('#BC001S_insert_btn_save').on('click',function(){
+    	$('#BC001S_insert_panel_error').text('后台服务器错误').show();
+        alert('保存失败');
+    });
+
+    $('#BC001S_insert_panel_form').validate({errorElement:'span'});
  });
 
 function BC001S_modify(obj){
+		$('#BC001S_UPDATE_MENU_NO').val(obj.Code);
+		$('#BC001S_UPDATE_MENU_NM').val(obj.Name);
+		$('#BC001S_UPDATE_PER_MENU_CD').val(obj.MENU_CD);
+		$('#BC001S_UPDATE_PER_MENU_NM').val(obj.MENU_NAME);
+		$('#BC001S_UPDATE_MENU_LVL').val(obj.Grade);
+		$('#BC001S_UPDATE_SORT_NO').val(obj.Sort);
+		$('#BC001S_UPDATE_ACTIONS').val(obj.Action);
+		$('#BC001S_UPDATE_REMARK').text(obj.REMARK);
+		update_BC001S_id = obj.Id;
 		$('#BC001S_update_panel').show();
         $('#BC001S_container').hide();
         return false;
     }
 </script>
 <div id='BC001S_container'>
-	<div class="position">所在位置：系统管理 &gt; 基础信息 &gt; 地区管理</div>
+	<div class="position">所在位置：系统管理 &gt; 基础信息 &gt; 公司管理</div>
 	<div class="search_form">
 		<form id="BC001S_search" action="" method="">
 			<div class="search_condition">
@@ -129,7 +170,7 @@ function BC001S_modify(obj){
 			<td>BasicInfo</td>
 			<td>1</td>
 			<td class="end">
-				<a title="修改" class="icon_button" onclick="return BC001S_modify({Id:1,Code:'BC001S',Parent:0,Name:'基础信息',Grade:1,Action:'BasicInfo',Sort:1});">
+				<a title="修改" class="icon_button" onclick="return BC001S_modify({Id:1,Code:'BC001S',Parent:0,Name:'基础信息',Grade:1,Action:'BasicInfo',Sort:1,MENU_CD:'JQK',MENU_NAME:'JSQ名称',REMARK:'这里是备注'});">
 					<img src="images/icon_edit.png" />
 				</a>
 			</td>
@@ -146,7 +187,7 @@ function BC001S_modify(obj){
 			<td>OfficeManagement</td>
 			<td>2</td>
 			<td class="end">
-				<a title="修改" class="icon_button" onclick="return BC001S_modify({Id:2,Code:'SS002S',Parent:0,Name:'办公管理',Grade:2,Action:'OfficeManagement',Sort:2});">
+				<a title="修改" class="icon_button" onclick="return BC001S_modify({Id:2,Code:'SS002S',Parent:0,Name:'办公管理',Grade:2,Action:'OfficeManagement',Sort:2,MENU_CD:'AAA',MENU_NAME:'AAA名称',REMARK:'这里是AAA备注'});">
 					<img src="images/icon_edit.png" />
 				</a>
 			</td>
@@ -162,7 +203,7 @@ function BC001S_modify(obj){
 	</a>
 	<input type="text" class="input_text" value="1" />
 	<span class="text">/&nbsp;18页</span>
-	<a href="javascript:void(0);" class="icon_button" title="下一页">
+	<a href="Views/Mock/Paging.html?page=2" class="icon_button" title="下一页">
 		<img src="images/icon_next.png" alt="" />
 	</a>
 	<a href="javascript:void(0);" class="icon_button" title="尾页">
@@ -176,7 +217,8 @@ function BC001S_modify(obj){
 </div>
 </div>
 <div class='invisible-container' id='BC001S_insert_panel'>
-	<p class="errorPrompt">出错~</p>
+<form id='BC001S_insert_panel_form'>
+	<p class="errorPrompt" style='display:none' id='BC001S_insert_panel_error'></p>
 	<div class="table_form">
 		<table cellpadding="0" cellspacing="0" border="0">
 			<colgroup>
@@ -192,13 +234,13 @@ function BC001S_modify(obj){
 				菜单代码：
 			</th>
 			<td>
-				<input id="MENU_NO" type="text" class="input_text" maxlength="20" />
+				<input id="BC001S_INSERT_MENU_NO" name='BC001S_INSERT_MENU_NO' type="text" class="input_text" required maxlength="20" />
 			</td>
 			<th> <strong>*</strong>
 				菜单名：
 			</th>
 			<td>
-				<input id="MENU_NM" type="text" class="input_text" maxlength="60" />
+				<input id="BC001S_INSERT_MENU_NM" name="BC001S_INSERT_MENU_NM" required type="text" class="input_text" maxlength="60" />
 			</td>
 			<td colspan="2"></td>
 		</tr>
@@ -208,14 +250,14 @@ function BC001S_modify(obj){
 				父编号：
 			</th>
 			<td>
-				<input id="PER_MENU_CD" type="text" class="input_text" />
+				<input id="BC001S_INSERT_PER_MENU_CD" name="BC001S_INSERT_PER_MENU_CD" required type="text" class="input_text" />
 			</td>
 			<th>
 				<strong>*</strong>
 				父编号名：
 			</th>
 			<td>
-				<input type="text" class="input_text" />
+				<input type="text" id="BC001S_INSERT_PER_MENU_NM" name="BC001S_INSERT_PER_MENU_NM" required class="input_text" />
 			</td>
 			<td colspan="2"></td>
 		</tr>
@@ -225,8 +267,8 @@ function BC001S_modify(obj){
 				级别：
 			</th>
 			<td>
-				<select id="MENU_LVL">
-					<option>全部</option>
+				<select id="BC001S_INSERT_MENU_LVL" name="BC001S_INSERT_MENU_LVL" required>
+					<option value="">全部</option>
 				</select>
 			</td>
 			<th>
@@ -234,7 +276,7 @@ function BC001S_modify(obj){
 				排序：
 			</th>
 			<td>
-				<input id="SORT_NO" type="text" class="input_text" />
+				<input id="BC001S_INSERT_SORT_NO" name="BC001S_INSERT_SORT_NO" type="text" required class="input_text" />
 			</td>
 			<td colspan="2"></td>
 		</tr>
@@ -244,7 +286,7 @@ function BC001S_modify(obj){
 				菜单行为：
 			</th>
 			<td>
-				<input id="ACTIONS" type="text" class="input_text" maxlength="150" />
+				<input id="BC001S_INSERT_ACTIONS" name="BC001S_INSERT_ACTIONS" type="text" required class="input_text" maxlength="150" />
 			</td>
 			<td colspan="4"></td>
 		</tr>
@@ -254,7 +296,7 @@ function BC001S_modify(obj){
 				备注：
 			</th>
 			<td colspan="3">
-				<textarea id="REMARK"></textarea>
+				<textarea id="BC001S_INSERT_REMARK" name="BC001S_INSERT_REMARK"></textarea>
 			</td>
 			<td colspan="2"></td>
 		</tr>
@@ -265,9 +307,10 @@ function BC001S_modify(obj){
 	<input type="button" value="保存" id='BC001S_insert_btn_save'  class="input_button" />
 	<input type="button" value="返回" id='BC001S_insert_btn_back' class="input_button cancle" />
 </div>
+</form>
 </div>
 <div class='invisible-container' id='BC001S_update_panel'>
-	<p class="errorPrompt">出错~</p>
+	<<p class="errorPrompt" style='display:none' id='BC001S_update_panel_error'>出错~</p>
 	<div class="table_form">
 		<table cellpadding="0" cellspacing="0" border="0">
 			<colgroup>
@@ -283,13 +326,13 @@ function BC001S_modify(obj){
 				菜单代码：
 			</th>
 			<td>
-				<input id="MENU_NO" type="text" class="input_text" maxlength="20" />
+				<input id="BC001S_UPDATE_MENU_NO" type="text" class="input_text" maxlength="20" />
 			</td>
 			<th> <strong>*</strong>
 				菜单名：
 			</th>
 			<td>
-				<input id="MENU_NM" type="text" class="input_text" maxlength="60" />
+				<input id="BC001S_UPDATE_MENU_NM" type="text" class="input_text" maxlength="60" />
 			</td>
 			<td colspan="2"></td>
 		</tr>
@@ -299,14 +342,14 @@ function BC001S_modify(obj){
 				父编号：
 			</th>
 			<td>
-				<input id="PER_MENU_CD" type="text" class="input_text" />
+				<input id="BC001S_UPDATE_PER_MENU_CD" type="text" class="input_text" />
 			</td>
 			<th>
 				<strong>*</strong>
 				父编号名：
 			</th>
 			<td>
-				<input type="text" class="input_text" />
+				<input type="text" id="BC001S_UPDATE_PER_MENU_NM"  class="input_text" />
 			</td>
 			<td colspan="2"></td>
 		</tr>
@@ -316,7 +359,7 @@ function BC001S_modify(obj){
 				级别：
 			</th>
 			<td>
-				<select id="MENU_LVL">
+				<select id="BC001S_UPDATE_MENU_LVL">
 					<option>全部</option>
 				</select>
 			</td>
@@ -325,7 +368,7 @@ function BC001S_modify(obj){
 				排序：
 			</th>
 			<td>
-				<input id="SORT_NO" type="text" class="input_text" />
+				<input id="BC001S_UPDATE_SORT_NO" type="text" class="input_text" />
 			</td>
 			<td colspan="2"></td>
 		</tr>
@@ -335,7 +378,7 @@ function BC001S_modify(obj){
 				菜单行为：
 			</th>
 			<td colspan="3">
-				<input id="ACTIONS" type="text" class="input_text" maxlength="150" />
+				<input id="BC001S_UPDATE_ACTIONS" type="text" class="input_text" maxlength="150" />
 			</td>
 			<td colspan="2"></td>
 		</tr>
@@ -345,7 +388,7 @@ function BC001S_modify(obj){
 				备注：
 			</th>
 			<td colspan="3">
-				<textarea id="REMARK"></textarea>
+				<textarea id="BC001S_UPDATE_REMARK"></textarea>
 			</td>
 			<td colspan="2"></td>
 		</tr>

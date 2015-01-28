@@ -1,0 +1,83 @@
+<table cellpadding="0" cellspacing="0" border="0">
+		<colgroup>
+		<col width="6%" />
+		<col width="6%" />
+		<col width="10%" />
+		<col width="10%" />
+		<col width="10%" />
+		<col width="10%" />
+		<col width="36%" />
+		<col width="6%" />
+		<col width="6%" />
+	</colgroup>
+	<thead>
+		<tr>
+			<th>序号</th>
+			<th>
+				<input type="checkbox" class="input_checkbox" />
+			</th>
+			<th>菜单代码</th>
+			<th>父编号</th>
+			<th>菜单名</th>
+			<th>级别</th>
+			<th>菜单行为</th>
+			<th>排序</th>
+			<th class="end">操作</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>3</td>
+			<td>
+				<input type="checkbox" class="input_checkbox" />
+			</td>
+			<td>BC002SAAA</td>
+			<td>1</td>
+			<td>财务管理</td>
+			<td>3</td>
+			<td>FinancialManagement</td>
+			<td>3</td>
+			<td class="end">
+				<a title="修改" class="icon_button" onclick="return BC001S_modify({Id:3,Code:'BC001S',Parent:0,Name:'财务管理',Grade:1,Action:'FinancialManagement',Sort:1,MENU_CD:'JQK',MENU_NAME:'JSQ名称',REMARK:'这里是备注'});">
+					<img src="images/icon_edit.png" />
+				</a>
+			</td>
+		</tr>
+		<tr>
+			<td>4</td>
+			<td>
+				<input type="checkbox" class="input_checkbox" />
+			</td>
+			<td>SS005SRRR</td>
+			<td>1</td>
+			<td>物资管理</td>
+			<td>4</td>
+			<td>PurchasingManagement</td>
+			<td>4</td>
+			<td class="end">
+				<a title="修改" class="icon_button" onclick="return BC001S_modify({Id:4,Code:'SS002S',Parent:0,Name:'物资管理',Grade:2,Action:'PurchasingManagement',Sort:2,MENU_CD:'AAA',MENU_NAME:'AAA名称',REMARK:'这里是AAA备注'});">
+					<img src="images/icon_edit.png" />
+				</a>
+			</td>
+		</tr>
+	</tbody>
+</table>
+<div class="pager">
+	<a href="javascript:void(0);" class="icon_button" title="首页">
+		<img src="images/icon_first.png" alt="" />
+	</a>
+	<a href="javascript:void(0);" class="icon_button" title="上一页">
+		<img src="images/icon_prev.png" alt="" />
+	</a>
+	<input type="text" class="input_text" value="2" />
+	<span class="text">/&nbsp;12页</span>
+	<a href="javascript:void(0);" class="icon_button" title="下一页">
+		<img src="images/icon_next.png" alt="" />
+	</a>
+	<a href="javascript:void(0);" class="icon_button" title="尾页">
+		<img src="images/icon_end.png" alt="" />
+	</a>
+	<span class="total">
+		共 <strong>120</strong>条记录
+	</span>
+</div>

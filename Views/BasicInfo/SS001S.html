@@ -1,8 +1,8 @@
 <script type="text/javascript">      
 $(document).ready(function(){
-    var update_SS001S_id = 0;
+    // var update_SS001S_id = 0;
     /*点击表头的checkbox，进行全选/全不选操作*/
-    $("#SS001S_table_list thead :checkbox").click(function(){
+    $("#SS001S_table_list").on('click','thead :checkbox',function(){
         var checkAll = $(this).is(":checked");
         $('#SS001S_table_list tbody :checkbox').closest('tr')[checkAll?'addClass':'removeClass']('click').end().prop('checked',checkAll);
     });
@@ -11,12 +11,20 @@ $(document).ready(function(){
             $(this).closest('tr')[$(this).is(':checked')?'addClass':'removeClass']('click');
     });
 
+    $('#SS001S_table_list').on('click','.pager a',function(){
+        $.get($(this).attr('href')+'&'+new Date(),function(data){
+            $('#SS001S_table_list').html(data);
+        });
+        return false;
+    });
+
     $('#SS001S_btnAdd').on('click',function(){
         $('#dialog_SS001S_insert').dialog({
             modal: true,
               buttons: {
                 "新增": function() {
-                    alert('菜单代码：'+ $('#add_SS001S_code').val());
+                    $('#dialog_SS001S_insert_form').valid();
+                    // alert('菜单代码：'+ $('#add_SS001S_code').val());
                 },
                 "取消": function() {
                   $( this ).dialog( "close" );
@@ -25,6 +33,7 @@ $(document).ready(function(){
         });
         return false;
     });
+    $('#dialog_SS001S_insert_form').validate({errorElement:'span'});
  });
 
 function SS001S_modify(obj){
@@ -34,7 +43,7 @@ function SS001S_modify(obj){
         $('#update_SS001S_grade').val(obj.Grade);
         $('#update_SS001S_action').val(obj.Action);
         $('#update_SS001S_sort').val(obj.Sort);
-        update_SS001S_id =obj.Id;
+        var update_SS001S_id = obj.Id;
         $('#dialog_SS001S_update').dialog({
             modal: true,
               buttons: {
@@ -177,60 +186,64 @@ function SS001S_modify(obj){
     </a>
     <input type="text" class="input_text" value="1" />
     <span class="text">/&nbsp;18页</span>
-    <a href="javascript:void(0);" class="icon_button" title="下一页">
+    <a href="Views/Mock/Paging.html?page=2" class="icon_button" title="下一页">
         <img src="images/icon_next.png" alt="" />
     </a>
     <a href="javascript:void(0);" class="icon_button" title="尾页">
         <img src="images/icon_end.png" alt="" />
     </a>
     <span class="total">
-        共 <strong>120</strong>
-        条记录
+        共 <strong>120</strong>条记录
     </span>
 </div>
 </div>
 
 <div id="dialog_SS001S_insert" class="invisible-container" title="菜单增加">
-
+<form id="dialog_SS001S_insert_form">
 <table class='pop_container'>
+    <colgroup>
+        <col width="30%" />
+        <col width="70%" />
+    </colgroup>
     <tr>
-        <td>菜单代码</td>
+        <td><strong>*</strong>菜单代码</td>
         <td>
-            <input type="text" name="" id="add_SS001S_code" type="text"/>
+            <input type="text" name="add_SS001S_code" required id="add_SS001S_code" type="text"/>
         </td>
     </tr>
     <tr>
-        <td>父编号</td>
+        <td><strong>*</strong>父编号</td>
         <td>
-            <input type="text" name="" id="add_SS001S_parent" type="text"/>
+            <input type="text" name="add_SS001S_parent" id="add_SS001S_parent" required  type="text"/>
         </td>
     </tr>
     <tr>
-        <td>菜单名</td>
-        <td><input type="text" name="" id="add_SS001S_name" type="text"/>
+        <td><strong>*</strong>菜单名</td>
+        <td><input type="text" name="add_SS001S_name" id="add_SS001S_name" required  type="text"/>
         </td>
     </tr>
     <tr>
         <td>级别</td>
         <td>
-            <select id="add_SS001S_grade">
-                            <option>全部</option>
+            <select id="add_SS001S_grade" name='add_SS001S_grade' required >
+                            <option value="">全部</option>
                         </select>
         </td>
     </tr>
     <tr>
-        <td>菜单行为</td>
+        <td><strong>*</strong>菜单行为</td>
         <td>
-            <input type="text" name="" id="add_SS001S_action" type="text"/>
+            <input type="text" name="add_SS001S_action" required  id="add_SS001S_action" type="text"/>
         </td>
     </tr>
     <tr>
-        <td>排序</td>
+        <td><strong>*</strong>排序</td>
         <td>
-            <input type="text" name="" id="add_SS001S_sort" type="text"/>
+            <input type="text" name="add_SS001S_sort" required  id="add_SS001S_sort" type="text"/>
         </td>
     </tr>
 </table>
+</form>
 </div>
 
 <div id="dialog_SS001S_update"  class='invisible-container'  title="菜单修改">
