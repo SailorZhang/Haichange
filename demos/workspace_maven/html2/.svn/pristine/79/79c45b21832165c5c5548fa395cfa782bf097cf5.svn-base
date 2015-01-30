@@ -1,0 +1,124 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link href="css/style.css" rel="stylesheet" type="text/css" />
+<title></title>
+</head>
+<body>
+<!--删除弹层-->
+<div class="popup">
+	<div class="popup_bg"></div>
+    <div class="popup_cont">
+    	<h1 class="title">
+        	<span class="text">提示</span>
+            <a href="javascript:void(0);" title="关闭" class="btn_close"></a>
+        </h1>
+        <div class="content">
+        	<p class="prompt">确定删除此条记录吗？删除后将不可恢复。</p>
+        </div>
+        <div class="button_toolbar_bottom">
+        	<input type="button" value="确定" class="input_button" />
+            <input type="button" value="取消" class="input_button cancle" />
+        </div>
+    </div>
+</div>
+<!--SS001S-添加弹层-->
+<div class="popup SS001S">
+	<div class="popup_bg"></div>
+    <div class="popup_cont">
+    	<h1 class="title">
+        	<span class="text">添加</span>
+            <a href="javascript:void(0);" title="关闭" class="btn_close"></a>
+        </h1>
+        <ul class="content">
+        	<li>
+            	<label><strong>*</strong>菜单代码：</label>
+                <input type="text" name="" class="input_text" />
+                <span class="error">不能为空</span>
+            </li>
+            <li>
+            	<label><strong>*</strong>父编号：</label>
+                <input type="text" name="" class="input_text" />
+            </li>
+            <li>
+            	<label><strong>*</strong>菜单名：</label>
+                <input type="text" name="" class="input_text" />
+            </li>
+            <li>
+            	<label><strong>*</strong>级别：</label>
+                <select>
+                	<option>全部</option>
+                </select>
+            </li>
+            <li>
+            	<label><strong>*</strong>菜单行为：</label>
+                <input type="text" name="" class="input_text long" value="112203" />
+            </li>
+            <li>
+            	<label><strong>*</strong>排序：</label>
+                <input type="text" name="" class="input_text" />
+            </li>
+            <li>
+            	<label>备注：</label>
+                <textarea></textarea>
+            </li>
+        </ul>
+        <div class="button_toolbar_bottom">
+        	<input type="button" value="保存并新增" class="input_button" />
+        	<input type="button" value="保存" class="input_button" />
+            <input type="button" value="取消" class="input_button cancle" />
+        </div>
+    </div>
+</div>
+<!--SS001S-修改弹层-->
+<div class="popup SS001S">
+	<div class="popup_bg"></div>
+    <div class="popup_cont">
+    	<h1 class="title">
+        	<span class="text">修改</span>
+            <a href="javascript:void(0);" title="关闭" class="btn_close"></a>
+        </h1>
+        <ul class="content">
+        	<li>
+            	<label><strong>*</strong>菜单代码：</label>
+                <input type="text" name="" class="input_text readonly" value="112203" readonly />
+                <span class="error">不能为空</span>
+            </li>
+            <li>
+            	<label><strong>*</strong>父编号：</label>
+                <input type="text" name="" class="input_text" value="112203" />
+            </li>
+            <li>
+            	<label><strong>*</strong>菜单名：</label>
+                <input type="text" name="" class="input_text" value="112203" />
+            </li>
+            <li>
+            	<label><strong>*</strong>级别：</label>
+                <select>
+                	<option>全部</option>
+                </select>
+            </li>
+            <li>
+            	<label><strong>*</strong>菜单行为：</label>
+                <input type="text" name="" class="input_text long" value="112203" />
+            </li>
+            <li>
+            	<label><strong>*</strong>排序：</label>
+                <input type="text" name="" class="input_text" value="112203" />
+            </li>
+            <li>
+            	<label>备注：</label>
+                <textarea>112203</textarea>
+            </li>
+        </ul>
+                <p class="errorPrompt">出错~ </p>
+        <div class="button_toolbar_bottom">
+        	<input type="button" value="保存并新增" class="input_button" />
+        	<input type="button" value="保存" class="input_button" />
+            <input type="button" value="取消" class="input_button cancle" />
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,93 @@
+@charset "utf-8";
+/* CSS Document */
+/*  global  */
+*{
+	padding:0px;
+	margin:0px;
+	font-size:12px;
+	color:#333;
+	font-family:"微软雅黑","宋体",Arial;
+}
+#login_body{
+	background-color:#0054a7;
+	width:100%;
+	height:100%;
+}
+.login{
+	position:fixed;
+	top:50%;
+	margin-top:-200px;
+	width:100%;
+	height:400px;
+	background-color:#fff;
+	text-align:center;
+}
+.login .logo{
+	display:inline-block;
+	margin:50px 0 0;
+	padding:30px 90px 30px 0;
+	width:250px;
+	height:235px;
+	border-right:2px solid #ddd;
+}
+.login .login_form{
+	display:inline-block;
+	margin:65px 0 55px 85px;
+	width:390px;
+	height:auto;
+	vertical-align:top;
+}
+.login .login_form .input_text{
+	display:block;
+	padding:0 20px 0 60px;
+	width:308px;
+	height:45px;
+	line-height:45px;
+	font-size:15px;
+	color:#b6b6b6;
+	border:1px solid #ddd;
+}
+.login .login_form .user{background:#fff url(../images/icon_user.png) 15px center no-repeat;}
+.login .login_form .password{margin-top:20px;background:#fff url(../images/icon_lock.png) 15px center no-repeat;}
+.login .login_form .remeber{
+	display:block;
+	margin:15px 0 0;
+	height:25px;
+}
+.login .login_form .remeber .input_checkbox{
+	float:left;
+	margin:4px 0 0;
+	width:18px;
+	height:18px;
+	border:1px solid #ddd;
+}
+.login .login_form .remeber .text{
+	float:left;
+	padding:0 0 0 10px;
+	height:25px;
+	line-height:25px;
+	font-size:15px;
+	color:#333;
+}
+.login .login_form .error{
+	visibility:hidden;
+	margin:15px 0 0;
+	text-align:left;
+	height:25px;
+	line-height:25px;
+	font-size:15px;
+	color:#f00;
+}
+.login .login_form .btn_login{
+	display:block;
+	margin:20px 0 0;
+	width:390px;
+	height:50px;
+	line-height:50px;
+	color:#fff;
+	font-size:20px;
+	background-color:#7ccef4;
+	border:none;
+	cursor:pointer;
+}
+.login .login_form .btn_login:hover{bcakground-color:#0054a7;}

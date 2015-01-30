@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="css/login.css" rel="stylesheet" type="text/css" />
+<title>海昌集团-管理系统</title>
+</head>
+<body id="login_body">
+<div class="login">
+	<h1 class="logo"><img src="images/login_logo.png" alt="" /></h1>
+    <div class="login_form">
+    	<input type="text" class="input_text user" onFocus="this.style.borderColor='#7ccef4'" onBlur="this.style.borderColor='#ddd'" />
+        <input type="text" class="input_text password" onFocus="this.style.borderColor='#7ccef4'" onBlur="this.style.borderColor='#ddd'" />
+        <p class="remeber">
+        	<input type="checkbox" class="input_checkbox" />
+            <span class="text">记住用户名密码</span>
+        </p>
+        <p class="error">用户名密码错误，请重新输入！</p>
+        <input type="submit" value="登&nbsp;&nbsp;录" class="btn_login" onMouseOver="this.style.backgroundColor='#0054a7'" onMouseOut="this.style.backgroundColor='#7ccef4'" />
+    </div>
+</div>
+</body>
+</html>

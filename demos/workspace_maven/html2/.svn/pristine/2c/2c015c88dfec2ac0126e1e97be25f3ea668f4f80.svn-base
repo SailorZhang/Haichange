@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="css/style.css" rel="stylesheet" type="text/css" />
+<title></title>
+</head>
+
+<body>
+<div class="position">
+	所在位置：系统管理 &gt; 权限管理 &gt; 菜单维护 &gt; 新增
+</div>
+<p class="errorPrompt">出错~ </p>
+<div class="table_form">
+	<table cellpadding="0" cellspacing="0" border="0">
+    	<colgroup>
+        	<col width="15%" />
+            <col width="35%" />
+            <col width="15%" />
+            <col width="35%" />
+        </colgroup>
+    	<tr>
+        	<th><strong>*</strong>菜单代码：</th>
+            <td><input type="text" name="" class="input_text" maxlength="20" /></td>
+            <th><strong>*</strong>菜单名：</th>
+            <td><input type="text" name="" class="input_text" maxlength="60" /></td>
+        </tr>
+        <tr>
+        	<th><strong>*</strong>父编号：</th>
+        	<td><input type="text" name="" class="input_text" /></td>
+            <th><strong>*</strong>父编号名：</th>
+            <td><input type="text" name="" class="input_text" /></td>
+        </tr>
+        <tr>
+        	<th><strong>*</strong>级别：</th>
+        	<td>
+            	<select>
+                    <option>全部</option>
+                </select>
+            </td>
+            <th><strong>*</strong>排序：</th>
+            <td><input type="text" name="" class="input_text" /></td>
+        </tr>
+        <tr>
+        	<th><strong>*</strong>菜单行为：</th>
+        	<td colspan="3"><input type="text" name="" class="input_text long" maxlength="150" /></td>
+        </tr>
+        <tr>
+            <th><strong>&nbsp;</strong>备注：</th>
+            <td colspan="3">
+            	<textarea></textarea>
+            </td>
+        </tr>
+    </table>
+</div>
+<div class="button_toolbar_bottom">
+    <input type="button" value="保存并新增" class="input_button" />
+    <input type="button" value="保存" class="input_button" />
+    <input type="button" value="返回" class="input_button cancle" />
+</div>
+</body>
+</html>
