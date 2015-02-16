@@ -1,4 +1,5 @@
 <script type="text/javascript">      
+var validator;
 $(document).ready(function(){
     // var update_SS001S_id = 0;
     /*点击表头的checkbox，进行全选/全不选操作*/
@@ -27,13 +28,15 @@ $(document).ready(function(){
                     // alert('菜单代码：'+ $('#add_SS001S_code').val());
                 },
                 "取消": function() {
-                  $( this ).dialog( "close" );
+                    validator.resetForm();
+                    $('#dialog_SS001S_insert_form')[0].reset();
+                    $( this ).dialog( "close" );
                 }
               }
         });
         return false;
     });
-    $('#dialog_SS001S_insert_form').validate({errorElement:'span'});
+    validator = $('#dialog_SS001S_insert_form').validate({errorElement:'span'});
  });
 
 function SS001S_modify(obj){
@@ -51,7 +54,7 @@ function SS001S_modify(obj){
                   alert('修改的Id:'+update_SS001S_id+'菜单代码：'+$('#update_SS001S_code').val());
                 },
                 "取消": function() {
-                  $( this ).dialog( "close" );
+                    $( this ).dialog( "close" );
                 }
               }
         });

@@ -1,5 +1,6 @@
 <script type="text/javascript">   
 var update_BC001S_id = 0;
+var validator;
 $(document).ready(function(){
     /*点击表头的checkbox，进行全选/全不选操作*/
     $("#BC001S_table_list").on('click','thead :checkbox',function(){
@@ -24,6 +25,8 @@ $(document).ready(function(){
     });
 
     $('#BC001S_insert_btn_back').on('click',function(){
+        validator.resetForm();
+        $('#BC001S_insert_panel_form')[0].reset();
 		$('#BC001S_insert_panel').hide();
         $('#BC001S_container').show();
     });
@@ -56,7 +59,7 @@ $(document).ready(function(){
         alert('保存失败');
     });
 
-    $('#BC001S_insert_panel_form').validate({errorElement:'span'});
+    validator = $('#BC001S_insert_panel_form').validate({errorElement:'span'});
  });
 
 function BC001S_modify(obj){
@@ -194,7 +197,7 @@ function BC001S_modify(obj){
 		</tr>
 	</tbody>
 </table>
-<div class="pager">
+<div class="pager" id="BC001S_PAGER">
 	<a href="javascript:void(0);" class="icon_button" title="首页">
 		<img src="images/icon_first.png" alt="" />
 	</a>
