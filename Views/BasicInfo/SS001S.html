@@ -19,6 +19,8 @@ $(document).ready(function(){
         return false;
     });
 
+    $('#pager').tmpl({TotalPage:10,CurrentPage:2,TotalRecord:160}).appendTo($('#SS001S_PAGER'));
+
     $('#SS001S_btnAdd').on('click',function(){
         $('#dialog_SS001S_insert').dialog({
             modal: true,
@@ -180,11 +182,11 @@ function SS001S_modify(obj){
         </tr>
     </tbody>
 </table>
-<div class="pager">
-    <a href="javascript:void(0);" class="icon_button" title="首页">
+<div class="pager" id="SS001S_PAGER">
+    <!-- <a href="javascript:void(0);" class="icon_button" title="首页">
         <img src="images/icon_first.png" alt="" />
     </a>
-    <a href="javascript:void(0);" class="icon_button" title="上一页">
+    <a href="Views/Mock/Paging.html?page=1" class="icon_button" title="上一页">
         <img src="images/icon_prev.png" alt="" />
     </a>
     <input type="text" class="input_text" value="1" />
@@ -197,7 +199,7 @@ function SS001S_modify(obj){
     </a>
     <span class="total">
         共 <strong>120</strong>条记录
-    </span>
+    </span> -->
 </div>
 </div>
 
