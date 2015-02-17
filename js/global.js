@@ -85,3 +85,53 @@ $(document).ready(function(){
 function log(info){
 	return console.log(info);
 }
+
+function createPager(param){
+    $('#pager').tmpl(param).appendTo(param.container.empty());
+	$('.pager_first',param.container).on('click',function(){
+		alert(1);
+		if(param.afterPaging){
+			param.afterPaging('w');			
+		}
+		createPager(param);
+    	return false;
+	});
+	$('.pager_next',param.container).on('click',function(){
+		if(param.CurrentPage==param.TotalPage){
+			alert(param.CurrentPage);
+		}else{
+			alert(param.CurrentPage+1);
+		}
+		if(param.afterPaging){
+			param.afterPaging('q');			
+		}
+    	return false;
+	});
+	$('.pager_prev',param.container).on('click',function(){
+		if (param.CurrentPage == 1) {
+			alert(1);
+		}else{
+			alert(param.CurrentPage-1);
+		}
+		if(param.afterPaging){
+			param.afterPaging('e');			
+		}
+    	return false;
+	});
+	$('.pager_last',param.container).on('click',function(){
+		alert(param.TotalPage);
+		if(param.afterPaging){
+			param.afterPaging('r');			
+		}
+    	return false;
+	});
+	$('input:text',param.container).on('keyup',function(e){
+		if(e.keyCode===13){
+			alert($(this).val());
+			if(param.afterPaging){
+				param.afterPaging('t');			
+			}
+    	return false;
+		}
+	});
+}

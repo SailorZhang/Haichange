@@ -12,12 +12,15 @@ $(document).ready(function(){
             $(this).closest('tr')[$(this).is(':checked')?'addClass':'removeClass']('click');
     });
 
-    $('#BC001S_table_list').on('click','.pager a',function(){
-    	$.get($(this).attr('href'),function(data){
-    		$('#BC001S_table_list').html(data);
-    	});
-    	return false;
-    });
+    // $('#BC001S_table_list').on('click','.pager a',function(){
+    // 	$.get($(this).attr('href'),function(data){
+    // 		$('#BC001S_table_list').html(data);
+    // 	});
+    // 	return false;
+    // });
+
+    createPager({TotalPage:20,TotalRecord:180,CurrentPage:14,container:$('#BC001S_PAGER'),URL:'Views/BasicInfo/BC001S.html'});
+
 
     $('#BC001S_btnAdd').on('click',function(){
         $('#BC001S_insert_panel').show();
@@ -198,7 +201,7 @@ function BC001S_modify(obj){
 	</tbody>
 </table>
 <div class="pager" id="BC001S_PAGER">
-	<a href="javascript:void(0);" class="icon_button" title="首页">
+	<!-- <a href="javascript:void(0);" class="icon_button" title="首页">
 		<img src="images/icon_first.png" alt="" />
 	</a>
 	<a href="javascript:void(0);" class="icon_button" title="上一页">
@@ -215,7 +218,7 @@ function BC001S_modify(obj){
 	<span class="total">
 		共 <strong>120</strong>
 		条记录
-	</span>
+	</span> -->
 </div>
 </div>
 </div>

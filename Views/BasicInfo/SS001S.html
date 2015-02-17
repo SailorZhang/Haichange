@@ -12,14 +12,19 @@ $(document).ready(function(){
             $(this).closest('tr')[$(this).is(':checked')?'addClass':'removeClass']('click');
     });
 
-    $('#SS001S_table_list').on('click','.pager a',function(){
-        $.get($(this).attr('href')+'&'+new Date(),function(data){
-            $('#SS001S_table_list').html(data);
-        });
-        return false;
-    });
+    var afterPaging = function(c){
+        createPager({TotalPage:10,TotalRecord:120,CurrentPage:3,container:$('#SS001S_PAGER'),URL:'Views/BasicInfo/SS001S.html',afterPaging:afterPaging});
+        alert(c);
+    }
 
-    $('#pager').tmpl({TotalPage:10,CurrentPage:2,TotalRecord:160}).appendTo($('#SS001S_PAGER'));
+    createPager({TotalPage:10,TotalRecord:120,CurrentPage:3,container:$('#SS001S_PAGER'),URL:'Views/BasicInfo/SS001S.html',afterPaging:afterPaging});
+
+    // $('#SS001S_table_list').on('click','.pager a',function(){
+    //     $.get($(this).attr('href')+'&'+new Date(),function(data){
+    //         $('#SS001S_table_list').html(data);
+    //     });
+    //     return false;
+    // });
 
     $('#SS001S_btnAdd').on('click',function(){
         $('#dialog_SS001S_insert').dialog({

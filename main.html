@@ -14,18 +14,18 @@
     <script src="js/global.js" type="text/javascript"></script>
     <script type="text/javascript" src="js/jquery.tmpl.js"></script>
     <script type="text/x-jquery-tmpl" id="pager">
-        <a href="javascript:void(0);" class="icon_button" title="首页">
+        <a href="#" class="icon_button pager_first" title="首页">
             <img src="images/icon_first.png" alt="" />
         </a>
-        <a href="Views/Mock/Paging.html?page=1" class="icon_button" title="上一页">
+        <a href="#" class="icon_button pager_prev" title="上一页">
             <img src="images/icon_prev.png" alt="" />
         </a>
         <input type="text" class="input_text" value="{{= CurrentPage}}" />
         <span class="text">/&nbsp;{{= TotalPage}}页</span>
-        <a href="Views/Mock/Paging.html?page=2" class="icon_button" title="下一页">
+        <a href="#" class="icon_button pager_next" title="下一页">
             <img src="images/icon_next.png" alt="" />
         </a>
-        <a href="javascript:void(0);" class="icon_button" title="尾页">
+        <a href="#" class="icon_button pager_last" title="尾页">
             <img src="images/icon_end.png" alt="" />
         </a>
         <span class="total">
