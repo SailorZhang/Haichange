@@ -62,7 +62,11 @@ $(document).ready(function(){
         alert('保存失败');
     });
 
-    validator = $('#BC001S_insert_panel_form').validate({errorElement:'span'});
+    validator = $('#BC001S_insert_panel_form').validate({errorElement:'span',
+		errorPlacement:function(error,element){
+			error.appendTo(element.parent());
+		}
+	});
  });
 
 function BC001S_modify(obj){
@@ -240,7 +244,8 @@ function BC001S_modify(obj){
 				菜单代码：
 			</th>
 			<td>
-				<input id="BC001S_INSERT_MENU_NO" name='BC001S_INSERT_MENU_NO' type="text" class="input_text" required maxlength="20" />
+				<input id="BC001S_INSERT_MENU_NO" name='BC001S_INSERT_MENU_NO' type="text" class="input_text" required isZipCode="true" maxlength="20" />
+				<button>^</button>
 			</td>
 			<th> <strong>*</strong>
 				菜单名：
